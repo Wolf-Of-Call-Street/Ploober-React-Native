@@ -26,11 +26,19 @@ const AppointmentReducer = (state, action) => {
     case 'set_current_payment':
       return {
         ...state, currentCardInfo: action.payload
-      }
+      };
     case 'set_current_address':
       return {
         ...state, currentAddress: action.payload
-      }
+      };
+    case 'submit_order':
+      return {
+        ...state, history: [...state.history, action.payload]
+      };
+    case 'get_history':
+      return {
+        ...state, history: action.payload
+      };
     default:
       return state;
   }
@@ -100,11 +108,29 @@ const setCurrentAddress = (dispatch) => async (userId) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
+
+const submitOrder = (dispatch) => async (order) => {
+  try {
+    await mongoApi.post(`/submit`, order);
+    dispatch({type: 'submit_order', payload: order})
+  } catch(err){
+    console.log(err);
+  }
+};
+
+const getHistory = (dispatch) => async (userId) => {
+  try {
+    const response = await mongoApi.get(`/history/${userId}`);
+    dispatch({ type: 'get_history', payload: response.data });
+  } catch (err) {
+    console.log(err);
+  };
+};
 
 export const { Provider, Context } = CreateDataContext(
   AppointmentReducer,
-  { getBusiness, getLocalBusiness, setAppointmentInfo, setPaymentInfo, setAddressInfo, setCurrentAddress, getPaymentInfo },
+  { getBusiness, getLocalBusiness, setAppointmentInfo, setPaymentInfo, setAddressInfo, setCurrentAddress, getPaymentInfo, setCurrentAddress, submitOrder, getHistory },
   {
     localBusinesses: [],
     businessInfo: {},
@@ -113,7 +139,8 @@ export const { Provider, Context } = CreateDataContext(
     addresses: [],
     currentAddress: {},
     cardInfo: [],
-    currentCardInfo: {}
+    currentCardInfo: {},
+    history: [],
   }
 );
 

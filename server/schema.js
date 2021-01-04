@@ -33,9 +33,13 @@ const historySchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  appointmentDate: {
+  dateTime: {
     type: Number,
     required: true
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 });
 
@@ -60,7 +64,6 @@ const userSchema = new mongoose.Schema({
 });
 
 const userInfoSchema = new mongoose.Schema({
-  history: [historySchema],
   addresses: [addressSchema],
   creditcards: [creditSchema],
   userId: {
@@ -71,4 +74,6 @@ const userInfoSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 const UserInfo = mongoose.model('UserInfo', userInfoSchema);
-module.exports = { User, UserInfo };
+const History = mongoose.model('History', historySchema);
+
+module.exports = { User, UserInfo, History };
