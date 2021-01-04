@@ -1,21 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import AppointmentScreen from './client/src/screens/AppointmentScreen';
+import ConfirmationScreen from './client/src/screens/ConfirmationScreen';
+import MapScreen from './client/src/screens/MapScreen';
+import SigninScreen from './client/src/screens/SigninScreen';
+import SignupScreen from './client/src/screens/SignupScreen';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const switchNavigator = createSwitchNavigator({
+  loginFlow: createStackNavigator({
+    Signup: SignupScreen,
+    Signin: SigninScreen
+  }),
+  mainFlow: createStackNavigator({
+    Map: MapScreen,
+    Appointment: AppointmentScreen,
+    Confirmation: ConfirmationScreen
+  })
 });
+
+const App =  createAppContainer(switchNavigator);
+
+export default () => {
+  return (
+    <App />
+  )
+}

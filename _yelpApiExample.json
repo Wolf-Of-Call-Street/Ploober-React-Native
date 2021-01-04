@@ -1,0 +1,95 @@
+{
+  "id": "AIhWsp8yNfKZfaX9d9Yajg",
+  "alias": "pasta-sisters-los-angeles",
+  "name": "Pasta Sisters",
+  "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/nZfuHcaGadmCxi6gAkBCBw/o.jpg",
+  "is_claimed": true,
+  "is_closed": false,
+  "url": "https://www.yelp.com/biz/pasta-sisters-los-angeles?adjust_creative=mGd1HndBlytBnXBcrNvBww&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=mGd1HndBlytBnXBcrNvBww",
+  "phone": "+13238705271",
+  "display_phone": "(323) 870-5271",
+  "review_count": 1556,
+  "categories": [
+      {
+          "alias": "delis",
+          "title": "Delis"
+      },
+      {
+          "alias": "italian",
+          "title": "Italian"
+      }
+  ],
+  "rating": 4.5,
+  "location": {
+      "address1": "3343 W Pico Blvd",
+      "address2": "",
+      "address3": "",
+      "city": "Los Angeles",
+      "zip_code": "90019",
+      "country": "US",
+      "state": "CA",
+      "display_address": [
+          "3343 W Pico Blvd",
+          "Los Angeles, CA 90019"
+      ],
+      "cross_streets": ""
+  },
+  "coordinates": {
+      "latitude": 34.0476,
+      "longitude": -118.317234
+  },
+  "photos": [
+      "https://s3-media4.fl.yelpcdn.com/bphoto/nZfuHcaGadmCxi6gAkBCBw/o.jpg",
+      "https://s3-media3.fl.yelpcdn.com/bphoto/O_gtfZKxbf8xeMEcweUA8Q/o.jpg",
+      "https://s3-media3.fl.yelpcdn.com/bphoto/NGijrlkP1r2x03gr12yORw/o.jpg"
+  ],
+  "price": "$$",
+  "hours": [
+      {
+          "open": [
+              {
+                  "is_overnight": false,
+                  "start": "1130",
+                  "end": "2030",
+                  "day": 0
+              },
+              {
+                  "is_overnight": false,
+                  "start": "1130",
+                  "end": "2030",
+                  "day": 1
+              },
+              {
+                  "is_overnight": false,
+                  "start": "1130",
+                  "end": "2030",
+                  "day": 2
+              },
+              {
+                  "is_overnight": false,
+                  "start": "1130",
+                  "end": "2030",
+                  "day": 3
+              },
+              {
+                  "is_overnight": false,
+                  "start": "1130",
+                  "end": "2030",
+                  "day": 4
+              },
+              {
+                  "is_overnight": false,
+                  "start": "1130",
+                  "end": "2030",
+                  "day": 5
+              }
+          ],
+          "hours_type": "REGULAR",
+          "is_open_now": true
+      }
+  ],
+  "transactions": [
+      "delivery",
+      "pickup"
+  ]
+}
