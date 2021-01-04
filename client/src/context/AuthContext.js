@@ -1,18 +1,14 @@
-import React, { useReducer } from 'react';
+import CreateDataContext from './CreateDataContext';
 
-export default ( reducer, actions, defaultValue) => {
-  const Context = React.createContext();
-
-  const Provider = ({children}) => {
-    const [state, dispatch] = useReducer(reducer, defaultValue);
+const authReducer = (state, action) => {
+  switch (action.type) {
+    default:
+      return state;
   }
+};
 
-  const boundActions = {};
-  for (let key in actions) {
-    boundAction[key] = actions[key](dispatch);
-  }
-
-  return (
-    <Context.Provider value={( state, ...boundActions)} >
-  )
-}
+export const { Context, Provider } = CreateDataContext(
+  authReducer,
+  { },
+  { }
+);

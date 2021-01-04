@@ -6,6 +6,9 @@ import ConfirmationScreen from './client/src/screens/ConfirmationScreen';
 import MapScreen from './client/src/screens/MapScreen';
 import SigninScreen from './client/src/screens/SigninScreen';
 import SignupScreen from './client/src/screens/SignupScreen';
+import HistoryScreen from './client/src/screens/HistoryScreen';
+import { Provider as AppointmentProvider } from './client/src/context/AppointmentContext';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 
 const switchNavigator = createSwitchNavigator({
@@ -13,10 +16,13 @@ const switchNavigator = createSwitchNavigator({
     Signup: SignupScreen,
     Signin: SigninScreen
   }),
-  mainFlow: createStackNavigator({
-    Map: MapScreen,
-    Appointment: AppointmentScreen,
-    Confirmation: ConfirmationScreen
+  mainTabs: createBottomTabNavigator({
+    mainFlow: createStackNavigator({
+      Map: MapScreen,
+      Appointment: AppointmentScreen,
+      Confirmation: ConfirmationScreen,
+    }),
+    History: HistoryScreen
   })
 });
 
@@ -24,6 +30,8 @@ const App =  createAppContainer(switchNavigator);
 
 export default () => {
   return (
-    <App />
+    <AppointmentProvider>
+      <App />
+    </AppointmentProvider>
   )
 }

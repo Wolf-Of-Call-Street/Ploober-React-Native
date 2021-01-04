@@ -17,12 +17,20 @@ const AppointmentReducer = (state, action) => {
       };
     case 'set_payment_info':
       return {
-        ...state, cardInfo: action.payload
+        ...state, cardInfo: [...state.cardInfo, action.payload]
       };
     case 'set_address_info':
       return {
-        ...state, address: action.payload
+        ...state, addresses: [...state.address, action.payload]
       };
+    case 'set_current_payment':
+      return {
+        ...state, currentCardInfo: action.payload
+      }
+    case 'set_current_address':
+      return {
+        ...state, currentAddress: action.payload
+      }
     default:
       return state;
   }
@@ -60,7 +68,7 @@ const setAppointmentInfo = (dispatch) => (date, reason) => {
 
 const setPaymentInfo = (dispatch) => async (cardInfo) => {
   try {
-    const response = await mongoApi.post('/creditCard', {cardInfo})
+    await mongoApi.post('/creditCard', {cardInfo})
     dispatch({type: 'set_payment_info', payload: cardInfo});
   } catch (err) {
     console.log(err)
@@ -69,22 +77,47 @@ const setPaymentInfo = (dispatch) => async (cardInfo) => {
 
 const setAddressInfo = (dispatch) =>  async (address) => {
   try {
-    const response = await mongoApi.post('/address', {address})
+    await mongoApi.post('/address', {address})
     dispatch({type: 'set_address_info', payload: address});
   } catch (err) {
     console.log(err)
   }
 };
 
+const getPaymentInfo = (dispatch) => async (userId) => {
+  try {
+    const response = await mongoApi.get(`/creditCard/${userId}`);
+    dispatch({type: 'set_current_payment', payload: response.data});
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-export const { Provider, Context } = createDataContext(
-  appointmentReducer,
-  { getBusiness, getLocalBusiness, setAppointmentInfo, setPaymentInfo, setAddressInfo },
+const setCurrentAddress = (dispatch) => async (userId) => {
+  try {
+    const response = await mongoApi.get(`/address/${userId}`);
+    dispatch({type: 'set_current_address', payload: response.data});
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const { Provider, Context } = CreateDataContext(
+  AppointmentReducer,
+  { getBusiness, getLocalBusiness, setAppointmentInfo, setPaymentInfo, setAddressInfo, setCurrentAddress, getPaymentInfo },
   {
     localBusinesses: [],
-    dateTime: 0,
     businessInfo: {},
+    dateTime: 0,
     appointmentReason: '',
+    addresses: [],
+    currentAddress: {},
+    cardInfo: [],
+    currentCardInfo: {}
+  }
+);
+
+/*
     address: {
       line1: '',
       line2: '',
@@ -109,5 +142,5 @@ export const { Provider, Context } = createDataContext(
         city: ''
       }
     }
-  }
-);
+
+*/
