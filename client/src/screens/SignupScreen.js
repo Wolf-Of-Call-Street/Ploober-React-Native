@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
+import { NavigationEvents } from 'react-navigation';
 import { Context as AuthContext } from '../context/AuthContext';
 import Spacer from '../components/Spacer';
 import AccountForm from '../components/AccountForm';
@@ -8,15 +9,20 @@ import AccountForm from '../components/AccountForm';
 // import { Button } from 'react-native-elements';
 
 const SignupScreen = ({ navigation }) => {
-  const { state, signup } = useContext(AuthContext);
+  const { state, signup, clearErrorMessage } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
+      <NavigationEvents onWillFocus={clearErrorMessage} />
       <AccountForm
         screenName="Sign Up"
         errorName={state.errorMessage}
         onSubmit={signup}
-        navigateCallback={() => navigation.navigate('Map')}
+        navigateCallback={() => {
+          if (state.authorized) {
+            navigation.navigate('Map');
+          }
+        }}
       />
       <Button
         onPress={() => navigation.navigate('Signin')}

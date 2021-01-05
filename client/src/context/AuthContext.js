@@ -6,9 +6,9 @@ import userApi from '../api/userApi';
 const authReducer = (state, action) => {
   switch (action.type) {
     case 'signin':
-      return { token: action.payload, errorMessage: '' };
+      return { token: action.payload, errorMessage: '', authorized: true };
     case 'add_error':
-      return { ...state, errorMessage: action.payload };
+      return { ...state, errorMessage: action.payload, authorized: false };
     case 'clear_error_message':
       return { ...state, errorMessage: '' };
     default:
@@ -50,5 +50,5 @@ const tryLocalSignIn = (dispatch) => async () => {
 export const { Context, Provider } = CreateDataContext(
   authReducer,
   { signup, signin, clearErrorMessage, tryLocalSignIn },
-  { token: null, errorMessage: '' }
+  { token: null, errorMessage: '', authorized: false }
 );

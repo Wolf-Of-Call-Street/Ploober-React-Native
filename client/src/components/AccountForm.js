@@ -50,21 +50,17 @@ const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
         ? <Button
             style={{ marginTop: 20 }}
             title="Submit"
-            onPress={() => {
-              onSubmit({ username, password, firstName, lastName });
-              if (!errorName) {
-                navigateCallback();
-              }
+            onPress={async () => {
+              await onSubmit({ username, password, firstName, lastName });
+              navigateCallback();
               }}
           />
         : <Button
             style={{ marginTop: 20 }}
             title="Submit"
-            onPress={() => {
-              onSubmit({ username, password });
-              if (!errorName) {
-                navigateCallback();
-              }
+            onPress={async () => {
+              await onSubmit({ username, password });
+              navigateCallback();
               }}
           />
       }
