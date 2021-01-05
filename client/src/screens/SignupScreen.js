@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
 import { Context as AuthContext } from '../context/AuthContext';
 import AccountForm from '../components/AccountForm';
 
