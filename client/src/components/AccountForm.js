@@ -43,6 +43,7 @@ const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
         onChangeText={setPassword}
         autoCapitalize="none"
         autoCorrect={false}
+        blurOnSubmit={false}
         secureTextEntry
       />
       {errorName ? <Text>{errorName}</Text> : null}
