@@ -3,13 +3,13 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import { Context as AuthContext } from '../context/AuthContext';
 import AccountForm from '../components/AccountForm';
 
-const SigninScreen = () => {
+const SigninScreen = ({ navigation }) => {
   const { state, signin } = useContext(AuthContext);
 
   return (
     <View>
       <AccountForm screenName="Sign In" onSubmit={signin} errorName={state.errorMessage} />
-
+      <Button onPress={() => navigation.navigate('Signup')} title="Don't have an account? Move to Sign Up" />
     </View>
   )
 };
