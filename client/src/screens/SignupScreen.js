@@ -15,7 +15,7 @@ const SignupScreen = ({ navigation }) => {
     <View style={styles.container}>
       <NavigationEvents onWillFocus={clearErrorMessage} />
       <AccountForm
-        screenName="Sign Up"
+        screenName="Sign Up for Ploober"
         errorName={state.errorMessage}
         onSubmit={signup}
         navigateCallback={() => {
@@ -34,6 +34,12 @@ const SignupScreen = ({ navigation }) => {
       <Button onPress={() => navigation.navigate('Confirmation')} title="Confirmation"/>
     </View>
   )
+};
+
+SignupScreen.navigationOptions = () => {
+  return {
+    headerShown: false
+  };
 };
 
 const styles = StyleSheet.create({

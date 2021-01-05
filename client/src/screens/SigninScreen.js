@@ -12,7 +12,7 @@ const SigninScreen = ({ navigation }) => {
     <View style={styles.container}>
       <NavigationEvents onWillFocus={clearErrorMessage} />
       <AccountForm
-        screenName="Sign In"
+        screenName="Sign In to Ploober"
         onSubmit={signin}
         errorName={state.errorMessage}
         navigateCallback={() => {
@@ -24,6 +24,12 @@ const SigninScreen = ({ navigation }) => {
       <Button style={{ marginTop: 20 }} onPress={() => navigation.navigate('Signup')} title="Don't have an account? Move to Sign Up" />
     </View>
   )
+};
+
+SigninScreen.navigationOptions = () => {
+  return {
+    headerShown: false
+  };
 };
 
 const styles = StyleSheet.create({

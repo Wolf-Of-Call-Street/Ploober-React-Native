@@ -12,7 +12,7 @@ const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
   return (
     <>
       <Text h2 style={styles.header}>{screenName}</Text>
-      {screenName === 'Sign Up' ?
+      {screenName === 'Sign Up for Ploober' ?
       <>
       <Input
       label="First Name"
@@ -47,7 +47,7 @@ const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
         secureTextEntry
       />
       {errorName ? <Text>{errorName}</Text> : null}
-      {screenName === 'Sign Up'
+      {screenName === 'Sign Up for Ploober'
         ? <Button
             style={{ marginTop: 20 }}
             title="Submit"
