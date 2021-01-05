@@ -32,7 +32,7 @@ const signup = (dispatch) => async ({ username, password, firstName, lastName })
 
 const signin = (dispatch) => async ({ username, password }) => {
   try {
-    const response = await userApi.post('signin', { username, password });
+    const response = await userApi.post('/signin', { username, password });
     await AsyncStorage.setItem('token', response.data.token);
     dispatch({ type: 'signin', payload: response.data.token });
   } catch (err) {

@@ -13,40 +13,38 @@ const AccountForm = ({ screenName, errorName, onSubmit }) => {
     <>
       <Text h2>{screenName}</Text>
       <Input
-        title="First Name"
+        label="First Name"
         value={firstName}
         onChangeText={setFirstName}
         autoCapitalize="none"
         autoCorrect={false}
       />
       <Input
-        title="Last Name"
+        label="Last Name"
         value={lastName}
         onChangeText={setLastName}
         autoCapitalize="none"
         autoCorrect={false}
       />
       <Input
-        title="Username"
+        label="Username"
         value={username}
         onChangeText={setUsername}
         autoCapitalize="none"
         autoCorrect={false}
       />
       <Input
-        title="Password"
+        label="Password"
         value={password}
         onChangeText={setPassword}
         autoCapitalize="none"
         autoCorrect={false}
         secureTextEntry
       />
-      {}
+      {errorName ? <Text>{errorName}</Text> : null}
       <Button
         title="Submit"
-        onPress={() => {
-          onSubmit({ username, password, firstName, lastName });
-        }}
+        onPress={() => onSubmit({ username, password, firstName, lastName }) }
       />
     </>
   )

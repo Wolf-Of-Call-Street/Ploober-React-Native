@@ -22,10 +22,11 @@ mongoose.connect(mongoUri)
 app.use(bodyparser.json());
 app.use(morgan('dev'));
 
-app.use('/', requireAuth, (req, res) => {
+app.use(router);
+
+app.use('/', auth, (req, res) => {
   res.send(`Hi ${req.user.name}, you sexy!`);
 });
-app.use(router);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
