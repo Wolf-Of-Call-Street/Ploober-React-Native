@@ -5,7 +5,7 @@ import Plumber from '../components/Plumber';
 import {Context as AppointmentContext} from '../context/AppointmentContext';
 
 const MapScreen = () => {
-  const {getLocalBusiness} = useContext(Context);
+  const {getLocalBusiness} = useContext(AppointmentContext);
 
   return (
     <View>
