@@ -37,7 +37,6 @@ const MapScreen = () => {
      startLocationTracking(getUserLocation);
   }, []);
 
-
   return (
     <View style={styles.container}>
       <Map currentLocation={{ lat, long }}/>
