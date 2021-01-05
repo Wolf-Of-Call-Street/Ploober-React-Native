@@ -73,7 +73,7 @@ router.post('/signup', async (req, res) => {
 
     const token = jwt.sign({ userId: user._id }, config.key);
 
-    res.send({ token })
+    res.send({ token });
   } catch (err) {
     return res.status(422).send(err);
   };

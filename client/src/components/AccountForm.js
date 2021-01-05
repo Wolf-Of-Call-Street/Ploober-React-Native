@@ -3,7 +3,7 @@ import { Text, Button, Input } from 'react-native-elements';
 import { StyleSheet } from 'react-native';
 import userApi from '../api/userApi.js';
 
-const AccountForm = ({ screenName, errorName, onSubmit }) => {
+const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -11,45 +11,68 @@ const AccountForm = ({ screenName, errorName, onSubmit }) => {
 
   return (
     <>
-      <Text h2>{screenName}</Text>
+      <Text h2 style={styles.header}>{screenName}</Text>
+      {screenName === 'Sign Up for Ploober' ?
+      <>
       <Input
-        title="First Name"
-        value={firstName}
-        onChangeText={setFirstName}
-        autoCapitalize="none"
-        autoCorrect={false}
+      label="First Name"
+      value={firstName}
+      onChangeText={setFirstName}
+      autoCapitalize="none"
+      autoCorrect={false}
       />
       <Input
-        title="Last Name"
-        value={lastName}
-        onChangeText={setLastName}
-        autoCapitalize="none"
-        autoCorrect={false}
+      label="Last Name"
+      value={lastName}
+      onChangeText={setLastName}
+      autoCapitalize="none"
+      autoCorrect={false}
       />
+      </>
+      : null}
       <Input
-        title="Username"
+        label="Username"
         value={username}
         onChangeText={setUsername}
         autoCapitalize="none"
         autoCorrect={false}
       />
       <Input
-        title="Password"
+        label="Password"
         value={password}
         onChangeText={setPassword}
         autoCapitalize="none"
         autoCorrect={false}
+        blurOnSubmit={false}
         secureTextEntry
       />
-      {}
-      <Button
-        title="Submit"
-        onPress={() => {
-          onSubmit({ username, password, firstName, lastName });
-        }}
-      />
+      {errorName ? <Text>{errorName}</Text> : null}
+      {screenName === 'Sign Up for Ploober'
+        ? <Button
+            style={{ marginTop: 20 }}
+            title="Submit"
+            onPress={async () => {
+              await onSubmit({ username, password, firstName, lastName });
+              navigateCallback();
+              }}
+          />
+        : <Button
+            style={{ marginTop: 20 }}
+            title="Submit"
+            onPress={async () => {
+              await onSubmit({ username, password });
+              navigateCallback();
+              }}
+          />
+      }
     </>
   )
 };
+
+const styles = StyleSheet.create({
+  header: {
+    marginBottom: 30
+  }
+})
 
 export default AccountForm;
