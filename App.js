@@ -8,6 +8,7 @@ import SigninScreen from './client/src/screens/SigninScreen';
 import SignupScreen from './client/src/screens/SignupScreen';
 import HistoryScreen from './client/src/screens/HistoryScreen';
 import { Provider as AppointmentProvider } from './client/src/context/AppointmentContext';
+import { Provider as AuthProvider } from './client/src/context/AuthContext';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 
@@ -30,8 +31,10 @@ const App =  createAppContainer(switchNavigator);
 
 export default () => {
   return (
-    <AppointmentProvider>
-      <App />
-    </AppointmentProvider>
+    <AuthProvider >
+      <AppointmentProvider>
+        <App />
+      </AppointmentProvider>
+    </AuthProvider>
   )
 }
