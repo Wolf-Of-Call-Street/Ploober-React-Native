@@ -12,20 +12,24 @@ const AccountForm = ({ screenName, errorName, onSubmit }) => {
   return (
     <>
       <Text h2>{screenName}</Text>
+      {screenName === 'Sign Up' ?
+      <>
       <Input
-        label="First Name"
-        value={firstName}
-        onChangeText={setFirstName}
-        autoCapitalize="none"
-        autoCorrect={false}
+      label="First Name"
+      value={firstName}
+      onChangeText={setFirstName}
+      autoCapitalize="none"
+      autoCorrect={false}
       />
       <Input
-        label="Last Name"
-        value={lastName}
-        onChangeText={setLastName}
-        autoCapitalize="none"
-        autoCorrect={false}
+      label="Last Name"
+      value={lastName}
+      onChangeText={setLastName}
+      autoCapitalize="none"
+      autoCorrect={false}
       />
+      </>
+      : null}
       <Input
         label="Username"
         value={username}
@@ -42,10 +46,16 @@ const AccountForm = ({ screenName, errorName, onSubmit }) => {
         secureTextEntry
       />
       {errorName ? <Text>{errorName}</Text> : null}
-      <Button
-        title="Submit"
-        onPress={() => onSubmit({ username, password, firstName, lastName }) }
-      />
+      {screenName === 'Sign Up'
+        ? <Button
+            title="Submit"
+            onPress={() => onSubmit({ username, password, firstName, lastName }) }
+          />
+        : <Button
+            title="Submit"
+            onPress={() => onSubmit({ username, password }) }
+          />
+      }
     </>
   )
 };
