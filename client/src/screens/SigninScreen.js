@@ -1,10 +1,15 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { Context as AuthContext } from '../context/AuthContext';
+import AccountForm from '../components/AccountForm';
 
 const SigninScreen = () => {
+  const { state, signin } = useContext(AuthContext);
+
   return (
     <View>
-      <Text>Signin Screen!!!!</Text>
+      <AccountForm screenName="Sign In" onSubmit={signin} errorName={state.errorMessage} />
+
     </View>
   )
 };

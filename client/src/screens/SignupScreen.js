@@ -10,7 +10,6 @@ const SignupScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text>Signup sCREENENN</Text>
       <AccountForm screenName="Sign Up" errorName={state.errorMessage} onSubmit={signup}/>
       <Button onPress={() => navigation.navigate('Signin')} title="Signin" />
       <Button onPress={() => navigation.navigate('Map')} title="Map"/>
