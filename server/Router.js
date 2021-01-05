@@ -98,6 +98,5 @@ router.post('/signin', async (req, res) => {
   }
 
 });
-// make a route for post request for makign a new user
 
 module.exports = router;
