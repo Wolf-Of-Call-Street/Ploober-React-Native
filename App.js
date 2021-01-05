@@ -7,6 +7,8 @@ import MapScreen from './client/src/screens/MapScreen';
 import SigninScreen from './client/src/screens/SigninScreen';
 import SignupScreen from './client/src/screens/SignupScreen';
 import HistoryScreen from './client/src/screens/HistoryScreen';
+import CardDetailScreen from './client/src/screens/CardDetailScreen';
+import AddressDetailScreen from './client/src/screens/AddressDetailScreen';
 import { Provider as AppointmentProvider } from './client/src/context/AppointmentContext';
 import { Provider as AuthProvider } from './client/src/context/AuthContext';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -22,6 +24,8 @@ const switchNavigator = createSwitchNavigator({
       Map: MapScreen,
       Appointment: AppointmentScreen,
       Confirmation: ConfirmationScreen,
+      Card: CardDetailScreen,
+      Address: AddressDetailScreen,
     }),
     History: HistoryScreen
   })
