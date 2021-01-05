@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import MapView from 'react-native-maps';
+import Map from '../components/Map';
+import Plumber from '../components/Plumber';
+import {Context as AppointmentContext} from '../context/AppointmentContext';
 
 const MapScreen = () => {
+  const {getLocalBusiness} = useContext(Context);
+
   return (
     <View>
-      <Text>Map Screen HOE</Text>
+      <Map />
+      <Plumber />
     </View>
   )
 };
