@@ -2,7 +2,9 @@ const router = require('express').Router();
 const User = require('./schema.js').User;
 const UserInfo = require('./schema.js').UserInfo;
 const History = require('./schema.js').History;
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+const config = require('./config.json');
 
 router.post('/creditCard', (req, res) => {
   UserInfo.create(req.body)
@@ -64,6 +66,38 @@ router.get('/history/:id', (res, req) => {
     })
 })
 
+router.post('/signup', async (req, res) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+
+    const token = jwt.sign({ userId: user._id }, config.key);
+
+    res.send({ token })
+  } catch (err) {
+    return res.status(422).send(err);
+  };
+});
+
+router.post('/signin', async (req, res) => {
+  if (!req.body.username || !req.body.password) {
+    return res.status(422).send('Need username and password!');
+  }
+
+  const user = await User.findOne({ username: req.body.username });
+  if (!user) {
+    return res.status(422).send('Invalid username or password!');
+  }
+
+  try {
+    await user.comparePassword(req.body.password);
+    const token = jwt.sign({ userId: user._id }, config.key);
+    res.send({ token });
+  } catch (err) {
+    return res.status(422).send('Invalid username or password!');
+  }
+
+});
 // make a route for post request for makign a new user
 
 module.exports = router;
