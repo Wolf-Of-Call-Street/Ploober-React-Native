@@ -3,7 +3,7 @@ import { Text, Button, Input } from 'react-native-elements';
 import { StyleSheet } from 'react-native';
 import userApi from '../api/userApi.js';
 
-const AccountForm = ({ screenName, errorName, onSubmit }) => {
+const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -11,7 +11,7 @@ const AccountForm = ({ screenName, errorName, onSubmit }) => {
 
   return (
     <>
-      <Text h2>{screenName}</Text>
+      <Text h2 style={styles.header}>{screenName}</Text>
       {screenName === 'Sign Up' ?
       <>
       <Input
@@ -48,16 +48,34 @@ const AccountForm = ({ screenName, errorName, onSubmit }) => {
       {errorName ? <Text>{errorName}</Text> : null}
       {screenName === 'Sign Up'
         ? <Button
+            style={{ marginTop: 20 }}
             title="Submit"
-            onPress={() => onSubmit({ username, password, firstName, lastName }) }
+            onPress={() => {
+              onSubmit({ username, password, firstName, lastName });
+              if (!errorName) {
+                navigateCallback();
+              }
+              }}
           />
         : <Button
+            style={{ marginTop: 20 }}
             title="Submit"
-            onPress={() => onSubmit({ username, password }) }
+            onPress={() => {
+              onSubmit({ username, password });
+              if (!errorName) {
+                navigateCallback();
+              }
+              }}
           />
       }
     </>
   )
 };
+
+const styles = StyleSheet.create({
+  header: {
+    marginBottom: 30
+  }
+})
 
 export default AccountForm;
