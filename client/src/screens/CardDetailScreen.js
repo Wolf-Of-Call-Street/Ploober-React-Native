@@ -5,7 +5,6 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   ScrollView,
-  KeyboardAvoidingView
 } from 'react-native';
 import { Text } from 'react-native-elements'
 import AddressForm from '../components/AddressForm';
@@ -15,7 +14,7 @@ import {
 } from 'react-native-vertical-credit-card-input';
 
 const _onChange = (formData) =>
-  console.log(JSON.stringify(formData, null, " "));
+  console.log(formData);
 
 const CardDetailScreen = () => {
   return (
@@ -44,7 +43,9 @@ const CardDetailScreen = () => {
           onChange={_onChange}
         />
         <AddressForm
-          textHeader='Enter Billing Address'
+          headerText='Enter Billing Address'
+          additionalValidation
+          valid
         />
       </ScrollView>
     </TouchableWithoutFeedback>
