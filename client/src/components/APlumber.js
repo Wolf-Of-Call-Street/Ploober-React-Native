@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import {Button, Image} from 'react-native-elements';
 import { FontAwesome5, Foundation } from '@expo/vector-icons';
+import {Context as AppointmentContext} from '../context/AppointmentContext';
 
-const APlumber = ({ business }) => {
+
+const APlumber = ({business}) => {
+  const { state, getBusiness } = useContext(AppointmentContext);
+
   return (
     <View style={styles.container}>
       <Image source={{ uri: business.image_url}} style={styles.image}/>
@@ -14,11 +18,14 @@ const APlumber = ({ business }) => {
         icon={
           <FontAwesome5
             name="toilet"
-            size={10}
+            size={25}
             color="white"
-            style={styles.toilet}
           />
         }
+        onPress={() => {
+          getBusiness(business.id);
+          console.log(state.businessInfo);
+        }}
       />
 
     </View>
@@ -28,6 +35,7 @@ const APlumber = ({ business }) => {
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 10,
+    padding: 2
   },
   name: {
     padding: 10,
