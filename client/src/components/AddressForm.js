@@ -49,7 +49,9 @@ const AddressForm = ({ headerText, additionalValidation, valid }) => {
               value={props.values.line1}
               containerStyle={styles.input}
             />
-            <Text style={styles.errorText}>{props.errors.line1}</Text>
+            <Text style={styles.errorText}>
+              {props.touched.line1 && props.errors.line1}
+            </Text>
             <Input
               label='Street: Line 2'
               placeholder='Suite 950'
@@ -57,7 +59,9 @@ const AddressForm = ({ headerText, additionalValidation, valid }) => {
               value={props.values.line2}
               containerStyle={styles.input}
             />
-            <Text style={styles.errorText}>{props.errors.line2}</Text>
+            <Text style={styles.errorText}>
+              {props.touched.line2 && props.errors.line2}
+            </Text>
             <Input
               label='Zip Code'
               placeholder='90045'
@@ -65,7 +69,9 @@ const AddressForm = ({ headerText, additionalValidation, valid }) => {
               value={props.values.zip}
               containerStyle={styles.input}
             />
-            <Text style={styles.errorText}>{props.errors.zip}</Text>
+            <Text style={styles.errorText}>
+              {props.touched.zip && props.errors.zip}
+            </Text>
             <Input
               label='City'
               placeholder='Los Angeles'
@@ -73,7 +79,9 @@ const AddressForm = ({ headerText, additionalValidation, valid }) => {
               value={props.values.city}
               containerStyle={styles.input}
             />
-            <Text style={styles.errorText}>{props.errors.city}</Text>
+            <Text style={styles.errorText}>
+              {props.touched.city && props.errors.city}
+            </Text>
             <Input
               label='State'
               placeholder='CA'
@@ -81,7 +89,9 @@ const AddressForm = ({ headerText, additionalValidation, valid }) => {
               value={props.values.state}
               containerStyle={styles.input}
             />
-            <Text style={styles.errorText}>{props.errors.state}</Text>
+            <Text style={styles.errorText}>
+              {props.touched.state && props.errors.state}
+            </Text>
             <Button
               title='Submit'
               onPress={props.handleSubmit}

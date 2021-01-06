@@ -9,6 +9,7 @@ import {
 import { Text } from 'react-native-elements'
 import AddressForm from '../components/AddressForm';
 import Spacer from '../components/Spacer';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   CreditCardInput
 } from 'react-native-vertical-credit-card-input';
@@ -18,37 +19,42 @@ const _onChange = (formData) =>
 
 const CardDetailScreen = () => {
   return (
-    <TouchableWithoutFeedback
-      onPress={Keyboard.dismiss}
-      accessible={false}
+    <KeyboardAwareScrollView
+      enableOnAndroid
+      extraHeight={150}
     >
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        style={{ flex: 1 }}
+      <TouchableWithoutFeedback
+        onPress={Keyboard.dismiss}
+        accessible={false}
       >
-        <Text
-          h2
-          style={{ fontSize: 24, alignSelf: 'center' }}>
-          Card Information
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          style={{ flex: 1 }}
+        >
+          <Text
+            h2
+            style={{ fontSize: 24, alignSelf: 'center' }}>
+            Card Information
         </Text>
-        <CreditCardInput
-          cardImageFront={
-            require('../../../assets/card-front.png')
-          }
-          cardImageBack={
-            require('../../../assets/card-back.png')
-          }
-          requiresName
-          onChange={_onChange}
-        />
-        <AddressForm
-          headerText='Enter Billing Address'
-          additionalValidation
-          valid
-        />
-      </ScrollView>
-    </TouchableWithoutFeedback>
+          <CreditCardInput
+            cardImageFront={
+              require('../../../assets/card-front.png')
+            }
+            cardImageBack={
+              require('../../../assets/card-back.png')
+            }
+            requiresName
+            onChange={_onChange}
+          />
+          <AddressForm
+            headerText='Enter Billing Address'
+            additionalValidation
+            valid
+          />
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAwareScrollView>
   )
 }
 
