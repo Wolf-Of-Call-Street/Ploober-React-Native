@@ -1,16 +1,19 @@
-import React, { useContext, useState, useEffect} from 'react';
+import React, { useContext, useEffect} from 'react';
 import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Button, Text, FlatList } from 'react-native-elements';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
 import APlumber from './APlumber';
 
 
-const Plumber = () => {
-  const { state } = useContext(AppointmentContext);
-  const totalBusinesses = state.localBusinesses;
+const Plumber = ({lat, long}) => {
 
+  const { state, getLocalBusiness } = useContext(AppointmentContext);
 
-  if (totalBusinesses.length === 0) {
+  console.log(lat, long);
+  useEffect(() => {
+    getLocalBusiness(lat, long);
+  });
+  if (state.localBusinesses.length === 0) {
     return null
   }
   return (

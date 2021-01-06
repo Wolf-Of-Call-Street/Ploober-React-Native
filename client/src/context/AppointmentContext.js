@@ -64,7 +64,6 @@ const getLocalBusiness = (dispatch) => async (lat, long) => {
         limit: 10
       }
     });
-    console.log(response.data.businesses);
     dispatch({ type: 'get_local_business', payload: response.data.businesses });
   } catch (err) {
     console.log(err);

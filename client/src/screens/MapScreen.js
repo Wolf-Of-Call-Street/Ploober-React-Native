@@ -30,11 +30,12 @@ const MapScreen = () => {
       setLong(position.coords.longitude);
     })
   };
+  console.log(lat, long);
   useEffect( () => {
     (async () =>  {
     await startLocationTracking();
-    await getUserLocation();
-        getLocalBusiness(lat, long)})()
+          getUserLocation();
+        })()
   }, []);
 
 
@@ -44,7 +45,7 @@ const MapScreen = () => {
       <Map currentLocation={{ lat, long }}/>
       {err ? <Text style={styles.err}>Please enable location services!</Text> : null}
       <Spacer />
-      <Plumber />
+      <Plumber location={{lat, long}}/>
     </View>
   )
 };
