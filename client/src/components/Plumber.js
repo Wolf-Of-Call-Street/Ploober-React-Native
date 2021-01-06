@@ -5,7 +5,7 @@ import { Context as AppointmentContext } from '../context/AppointmentContext';
 import APlumber from './APlumber';
 
 
-const Plumber = () => {
+const Plumber = ({ navigation }) => {
 
   const { state, getLocalBusiness } = useContext(AppointmentContext);
 
@@ -19,7 +19,7 @@ const Plumber = () => {
         <View style={{paddingBottom: 255}}>
           {state.localBusinesses.map(business => {
             return (
-              <APlumber business={business} key={business.id}/>
+              <APlumber business={business} key={business.id} navigation={navigation}/>
             )
           })}
         </View>
