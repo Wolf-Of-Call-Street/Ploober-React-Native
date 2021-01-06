@@ -7,9 +7,6 @@ import { requestPermissionsAsync } from 'expo-location';
 import Spacer from '../components/Spacer';
 
 const MapScreen = () => {
-
-  const {getLocalBusiness} = useContext(AppointmentContext);
-
   const [err, setErr] = useState(null);
   const [lat, setLat] = useState(0);
   const [long, setLong] = useState(0);
@@ -27,17 +24,18 @@ const MapScreen = () => {
       setErr(err);
     }
   };
-  const getUserLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
-    })
+  const getUserLocation =  () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+        setLat(position.coords.latitude);
+        setLong(position.coords.longitude);
+        getLocalBusiness(position.coords.latitude, position.coords.longitude);
+      })
   };
   console.log(lat, long);
   useEffect( () => {
     (async () =>  {
     await startLocationTracking();
-          getUserLocation();
+    await getUserLocation();
         })()
   }, []);
 
@@ -48,7 +46,7 @@ const MapScreen = () => {
       <Map currentLocation={{ lat, long }}/>
       {err ? <Text style={styles.err}>Please enable location services!</Text> : null}
       <Spacer />
-      <Plumber location={{lat, long}}/>
+      <Plumber />
     </View>
   )
 };

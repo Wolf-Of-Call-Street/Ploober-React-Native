@@ -24,7 +24,7 @@ const AddressDetailScreen = () => {
           />
         </ScrollView>
       </TouchableWithoutFeedback>
-    </KeyboardAwareScrollView
+    </KeyboardAwareScrollView>
   )
 }
 

@@ -5,14 +5,11 @@ import { Context as AppointmentContext } from '../context/AppointmentContext';
 import APlumber from './APlumber';
 
 
-const Plumber = ({lat, long}) => {
+const Plumber = () => {
 
   const { state, getLocalBusiness } = useContext(AppointmentContext);
 
-  console.log(lat, long);
-  useEffect(() => {
-    getLocalBusiness(lat, long);
-  });
+
   if (state.localBusinesses.length === 0) {
     return null
   }
