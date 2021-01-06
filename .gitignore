@@ -10,6 +10,6 @@ npm-debug.*
 web-build/
 server/config.json
 client/src/api/apiConfig.json
-
+*.txt
 # macOS
 .DS_Store
