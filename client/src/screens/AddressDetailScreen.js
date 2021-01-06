@@ -1,10 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import AddressForm from '../components/AddressForm';
 
 const AddressDetailScreen = () => {
   return (
     <View>
-      <Text>I am the AddressDetailScreen</Text>
+      <AddressForm
+        textHeader='Enter Address'
+      />
     </View>
   )
 }
