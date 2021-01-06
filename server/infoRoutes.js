@@ -60,13 +60,13 @@ router.post('/submit', (req, res) => {
     });
 });
 
-router.get('/history', (res, req) => {
-  History.find({userId: req.user._id})
+router.get('/history', (req, res) => {
+  History.find({ userId: req.user._id })
     .then((results) => {
-      res.status(200).json(results.data);
+      res.status(200).json(results);
     })
     .catch((err) => {
-      res.status(400).send('Error for getting history!')
+      res.status(400).send(err)
     })
 })
 
