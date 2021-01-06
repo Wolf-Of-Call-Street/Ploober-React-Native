@@ -3,7 +3,7 @@ import { View, Text, StyleSheet} from 'react-native';
 // import Name from '../components/PlumberName.js';
 import PlumberInfo from '../components/PlumberInfo.js';
 import Issue from '../components/Issue.js';
-import Calender from '../components/Calender.js';
+import CalendarModule from '../components/Calendar.js';
 import Confirm from '../components/ConfirmAppointmentButton.js'
 
 const AppointmentScreen = () => {
@@ -11,7 +11,7 @@ const AppointmentScreen = () => {
     <View>
       <PlumberInfo />
       <Issue />
-      <Calender />
+      <CalendarModule />
       <Confirm />
     </View>
   )

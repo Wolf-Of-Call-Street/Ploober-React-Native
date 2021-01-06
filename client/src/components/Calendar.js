@@ -4,7 +4,7 @@ import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
 
 
-const Calender = () => {
+const CalendarModule = () => {
   return (
     <View>
       <CalendarList
@@ -24,4 +24,4 @@ const Calender = () => {
   )
 };
 
-export default Calender;
+export default CalendarModule;
