@@ -7,6 +7,9 @@ import { requestPermissionsAsync } from 'expo-location';
 import Spacer from '../components/Spacer';
 
 const MapScreen = () => {
+
+  const {getLocalBusiness} = useContext(AppointmentContext);
+
   const [err, setErr] = useState(null);
   const [lat, setLat] = useState(0);
   const [long, setLong] = useState(0);
@@ -36,6 +39,7 @@ const MapScreen = () => {
   useEffect( () => {
      startLocationTracking(getUserLocation);
   }, []);
+
 
   return (
     <View style={styles.container}>
