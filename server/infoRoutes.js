@@ -48,7 +48,10 @@ router.get('/address/:id', (req, res) => {
 });
 
 router.post('/submit', (req, res) => {
-  History.create(req.body)
+  const { businessId, appointmentReason, dateTime } = req.body;
+  const userId = req.user._id;
+
+  History.create({ businessId, appointmentReason, dateTime, userId })
     .then(() => {
       res.status(200).send('Posted to history!');
     })
@@ -57,8 +60,8 @@ router.post('/submit', (req, res) => {
     });
 });
 
-router.get('/history/:id', (res, req) => {
-  History.find({_id: req.params.id})
+router.get('/history', (res, req) => {
+  History.find({userId: req.user._id})
     .then((results) => {
       res.status(200).json(results.data);
     })
