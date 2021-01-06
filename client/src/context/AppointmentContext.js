@@ -140,7 +140,7 @@ export const { Provider, Context } = CreateDataContext(
     currentAddress: {},
     cardInfo: [],
     currentCardInfo: {},
-    history: [],
+    history: []
   }
 );
 

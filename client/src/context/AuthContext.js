@@ -6,11 +6,13 @@ import userApi from '../api/userApi';
 const authReducer = (state, action) => {
   switch (action.type) {
     case 'signin':
-      return { token: action.payload, errorMessage: '' };
+      return { token: action.payload, errorMessage: '', authorized: true };
     case 'add_error':
-      return { ...state, errorMessage: action.payload };
+      return { ...state, errorMessage: action.payload, authorized: false };
     case 'clear_error_message':
       return { ...state, errorMessage: '' };
+    case 'logout':
+      return { token: null, errorMessage: '', authorized: false };
     default:
       return state;
   }
@@ -32,7 +34,7 @@ const signup = (dispatch) => async ({ username, password, firstName, lastName })
 
 const signin = (dispatch) => async ({ username, password }) => {
   try {
-    const response = await userApi.post('signin', { username, password });
+    const response = await userApi.post('/signin', { username, password });
     await AsyncStorage.setItem('token', response.data.token);
     dispatch({ type: 'signin', payload: response.data.token });
   } catch (err) {
@@ -47,8 +49,13 @@ const tryLocalSignIn = (dispatch) => async () => {
   }
 };
 
+const logout = (dispatch) => async () => {
+  await AsyncStorage.removeItem('token');
+  dispatch({ type: 'logout' });
+}
+
 export const { Context, Provider } = CreateDataContext(
   authReducer,
-  { signup, signin, clearErrorMessage, tryLocalSignIn },
-  { token: null, errorMessage: '' }
+  { signup, signin, clearErrorMessage, tryLocalSignIn, logout },
+  { token: null, errorMessage: '', authorized: false }
 );
