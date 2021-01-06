@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import MapView from 'react-native-maps';
 import { Text } from 'react-native-elements';
 import { StyleSheet, View } from 'react-native';
-
+import {Context as AppointmentContext} from '../context/AppointmentContext';
 
 const Map = ({ currentLocation }) => {
   const lat = currentLocation.lat;
@@ -14,9 +14,9 @@ const Map = ({ currentLocation }) => {
     longitudeDelta: 0.01
   };
 
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Plumbers Nearest You</Text>
       <MapView
         style={styles.map}
         region={location}
@@ -29,15 +29,16 @@ const Map = ({ currentLocation }) => {
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    borderColor: 'red',
-    borderWidth: 1
+    borderColor: '#CBDBFC',
+    borderWidth: 2
   },
   map: {
-    height: 300,
+    height: 200,
     marginBottom: 10
   },
   title: {
-    fontSize: 24
+    fontSize: 24,
+    textAlign: 'center'
   }
 });
 

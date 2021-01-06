@@ -51,17 +51,15 @@ const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
         ? <Button
             style={{ marginTop: 20 }}
             title="Submit"
-            onPress={async () => {
-              await onSubmit({ username, password, firstName, lastName });
-              navigateCallback();
+            onPress={() => {
+              onSubmit({ username, password, firstName, lastName }, navigateCallback);
               }}
           />
         : <Button
             style={{ marginTop: 20 }}
             title="Submit"
-            onPress={async () => {
-              await onSubmit({ username, password });
-              navigateCallback();
+            onPress={() => {
+              onSubmit({ username, password }, navigateCallback);
               }}
           />
       }
