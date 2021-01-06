@@ -16,9 +16,7 @@ const SigninScreen = ({ navigation }) => {
         onSubmit={signin}
         errorName={state.errorMessage}
         navigateCallback={() => {
-          if (state.authorized) {
-            navigation.navigate('Map');
-          }
+          navigation.navigate('Map');
         }}
       />
       <Button style={{ marginTop: 20 }} onPress={() => navigation.navigate('Signup')} title="Don't have an account? Move to Sign Up" />
