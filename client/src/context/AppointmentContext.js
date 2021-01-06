@@ -54,16 +54,17 @@ const getBusiness = (dispatch) => async (id) => {
 };
 
 const getLocalBusiness = (dispatch) => async (lat, long) => {
+
   try {
     const response = await Yelp.get('/search', {
       params: {
-        limit: 20,
         term: 'plumb*',
         latitude: lat,
         longitude: long,
-        radius: 24000
+        limit: 10
       }
     });
+    console.log(response.data.businesses);
     dispatch({ type: 'get_local_business', payload: response.data.businesses });
   } catch (err) {
     console.log(err);
