@@ -149,7 +149,7 @@ export const { Provider, Context } = CreateDataContext(
     address: {
       line1: '',
       line2: '',
-      zip: 00000,
+      zip: '', // Changed to string
       state: '',
       city: ''
     },

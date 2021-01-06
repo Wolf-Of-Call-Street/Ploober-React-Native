@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import { NavigationEvents } from 'react-navigation';
@@ -9,7 +9,13 @@ import AccountForm from '../components/AccountForm';
 // import { Button } from 'react-native-elements';
 
 const SignupScreen = ({ navigation }) => {
-  const { state, signup, clearErrorMessage } = useContext(AuthContext);
+  const { state, signup, clearErrorMessage, tryLocalSignIn } = useContext(AuthContext);
+
+  useEffect(() => {
+    tryLocalSignIn(() => {
+      navigation.navigate('Map');
+    });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -19,9 +25,7 @@ const SignupScreen = ({ navigation }) => {
         errorName={state.errorMessage}
         onSubmit={signup}
         navigateCallback={() => {
-          if (state.authorized) {
-            navigation.navigate('Map');
-          }
+          navigation.navigate('Map');
         }}
       />
       <Button

@@ -11,5 +11,6 @@ web-build/
 server/config.json
 client/src/api/apiConfig.json
 *.txt
+package-lock.json
 # macOS
 .DS_Store

@@ -6,7 +6,7 @@ import ConfirmationScreen from './client/src/screens/ConfirmationScreen';
 import MapScreen from './client/src/screens/MapScreen';
 import SigninScreen from './client/src/screens/SigninScreen';
 import SignupScreen from './client/src/screens/SignupScreen';
-import HistoryScreen from './client/src/screens/HistoryScreen';
+import AccountScreen from './client/src/screens/AccountScreen';
 import CardDetailScreen from './client/src/screens/CardDetailScreen';
 import AddressDetailScreen from './client/src/screens/AddressDetailScreen';
 import { Provider as AppointmentProvider } from './client/src/context/AppointmentContext';
@@ -27,7 +27,7 @@ const switchNavigator = createSwitchNavigator({
       Card: CardDetailScreen,
       Address: AddressDetailScreen,
     }),
-    History: HistoryScreen
+    Account: AccountScreen
   })
 });
 
