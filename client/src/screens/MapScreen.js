@@ -13,14 +13,13 @@ const MapScreen = () => {
   const { state, getLocalBusiness } = useContext(AppointmentContext);
 
 
-  const startLocationTracking = async (next) => {
+  const startLocationTracking = async () => {
     try {
       const {granted} = await requestPermissionsAsync();
       if (!granted) {
         throw new Error('Location permission not granted');
       }
       setErr(null);
-      next();
     } catch (err) {
       setErr(err);
     }
@@ -32,13 +31,12 @@ const MapScreen = () => {
     })
   };
   useEffect( () => {
-     startLocationTracking(getUserLocation);
+    (async () =>  {
+    await startLocationTracking();
+    await getUserLocation();
+        getLocalBusiness(lat, long)})()
   }, []);
 
-  useEffect(() => {
-    getLocalBusiness(lat, long);
-  }, []);
-  console.log(lat, long);
 
   return (
     <View style={styles.container}>
