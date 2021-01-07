@@ -10,11 +10,6 @@ const AccountScreen = ({ navigation }) => {
     <View>
       <Text h2>Account Screennnenenennenene</Text>
       <Button onPress={() => logout(() => navigation.navigate('Signin') )} title="Log Out"/>
-      {/* FOR TESTING PURPOSES ONLY REMOVE THIS LATER */}
-      <Button
-      onPress={() => navigation.navigate('Confirmation')}
-      title="Confirmation"
-      />
     </View>
   )
 };
