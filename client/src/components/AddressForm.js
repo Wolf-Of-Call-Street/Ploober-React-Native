@@ -20,7 +20,6 @@ const AddressValidationSchema = Yup.object({
 })
 
 const AddressForm = ({ headerText, setAddressInfo, sendAddressInfo, addresses }) => {
-  console.log('AddressForm addresses', addresses);
   return (
     <>
       <Spacer>
@@ -39,7 +38,6 @@ const AddressForm = ({ headerText, setAddressInfo, sendAddressInfo, addresses })
         validationSchema={AddressValidationSchema}
         onSubmit={async (values) => {
           setAddressInfo(values);
-          // sendAddressInfo(addresses);
         }}
       >
         {(props) => (

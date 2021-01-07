@@ -5,9 +5,10 @@ import Spacer from '../components/Spacer';
 import {
   Context as AppointmentContext
 } from '../context/AppointmentContext';
+import { NavigationEvents } from 'react-navigation';
 
 const ConfirmationScreen = ({ navigation }) => {
-  const { state: { appointmentReason, dateTime, addresses } } = useContext(AppointmentContext)
+  const { state: { appointmentReason, dateTime, addresses}, fetchAddresses, state } = useContext(AppointmentContext);
 
   const day = new Date(dateTime).toLocaleDateString('en-US', {
     day: 'numeric',
@@ -21,6 +22,10 @@ const ConfirmationScreen = ({ navigation }) => {
   });
 
   return (
+    <>
+    <NavigationEvents
+      onWillFocus={fetchAddresses}
+    />
     <ScrollView
       showsVerticalScrollIndicator ={false}
       showsHorizontalScrollIndicator={false}
@@ -55,12 +60,11 @@ const ConfirmationScreen = ({ navigation }) => {
       <Divider />
       <Spacer>
         <Text h3 style={styles.center}>Addresses</Text>
-        <Text>{addresses.line1}</Text>
+        <Text>{addresses.length} adresses in memory</Text>
         <Button
           title="Add a New Address"
           onPress={() => {
             navigation.navigate('Address')
-            console.log('Confirmation Screen', addresses)
           }}
         />
       </Spacer>
@@ -69,6 +73,7 @@ const ConfirmationScreen = ({ navigation }) => {
       <Button title="Confirm" />
       </Spacer>
     </ScrollView>
+    </>
   )
 };
 

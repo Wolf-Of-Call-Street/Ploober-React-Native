@@ -40,6 +40,10 @@ const AppointmentReducer = (state, action) => {
       return {
         ...state, history: action.payload
       };
+    case 'fetch_addresses':
+      return {
+        ...state, addresses: action.payload
+      }
     default:
       return state;
   }
@@ -90,11 +94,20 @@ const setAddressInfo = (dispatch) =>  (address) => {
 
 const sendAddressInfo = (dispatch) => async (addresses) => {
   try {
-    await userApi.post('/address', {addresses})
+    await userApi.post('/address', {addresses});
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-}
+};
+
+const fetchAddresses = (dispatch) => async () => {
+  try{
+    const response = await userApi.get('/address');
+    dispatch({ type: 'fetch_addresses', payload: response.data});
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const getPaymentInfo = (dispatch) => async (userId) => {
   try {
@@ -134,7 +147,7 @@ const getHistory = (dispatch) => async (userId) => {
 
 export const { Provider, Context } = CreateDataContext(
   AppointmentReducer,
-  { getBusiness, getLocalBusiness, setAppointmentInfo, setPaymentInfo, setAddressInfo, setCurrentAddress, getPaymentInfo, setCurrentAddress, submitOrder, getHistory, sendAddressInfo },
+  { getBusiness, getLocalBusiness, setAppointmentInfo, setPaymentInfo, setAddressInfo, setCurrentAddress, getPaymentInfo, setCurrentAddress, submitOrder, getHistory, sendAddressInfo, fetchAddresses },
   {
     localBusinesses: [],
     businessInfo: {},
