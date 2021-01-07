@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Text, Button, ListItem } from 'react-native-elements'
 import { Context as AuthContext } from '../context/AuthContext';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
@@ -46,10 +46,20 @@ const AccountScreen = ({ navigation }) => {
           keyExtractor={(item) => item._id}
           renderItem={({ item }) => {
             return (
-              <ListItem style={styles.historyItem}>
-                <ListItem.Title>PLACEHOLDER FOR NAME OF BUSINESS</ListItem.Title>
-                <Text>{timeConverter(item.dateTime)}</Text>
-              </ListItem>
+              <TouchableOpacity>
+                <ListItem style={styles.historyItem}>
+                  <View style={{flexDirection: "column", flex: 1}}>
+                    <ListItem.Title>{item.businessName}</ListItem.Title>
+                    <Text>{timeConverter(item.dateTime)}</Text>
+                  </View>
+                  <View style={{flexDirection: "column", flex: 1}}>
+                    <Text>{item.address.line1}</Text>
+                    {item.address.line2 ? <Text>{item.address.line2}</Text> : null}
+                    <Text>{`${item.address.city}, ${item.address.state} ${item.address.zipcode}`}</Text>
+                  </View>
+                  <ListItem.Chevron />
+                </ListItem>
+              </TouchableOpacity>
             )
           }}
         />
@@ -60,7 +70,7 @@ const AccountScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   historyItem: {
-    flexDirection: 'column'
+    justifyContent: 'space-between'
   }
 });
 
