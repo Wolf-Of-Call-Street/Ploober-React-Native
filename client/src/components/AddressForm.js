@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
 import Spacer from '../components/Spacer';
@@ -37,9 +37,9 @@ const AddressForm = ({ headerText, setAddressInfo, sendAddressInfo, addresses })
           state: ''
         }}
         validationSchema={AddressValidationSchema}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
           setAddressInfo(values);
-          sendAddressInfo(addresses);
+          // sendAddressInfo(addresses);
         }}
       >
         {(props) => (

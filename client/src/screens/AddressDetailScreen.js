@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, Keyboard, TouchableWithoutFeedback, ScrollView } from 'react-native';
 import {
 KeyboardAwareScrollView
@@ -8,6 +8,13 @@ import { Context as AppointmentContext } from '../context/AppointmentContext';
 
 const AddressDetailScreen = () => {
   const { state: { addresses }, setAddressInfo, sendAddressInfo } = useContext(AppointmentContext);
+
+  useEffect(() => {
+      if (addresses.length) {
+        sendAddressInfo(addresses);
+      }
+  }, [addresses]);
+
   return (
     <KeyboardAwareScrollView
       enableOnAndroid

@@ -69,7 +69,8 @@ const userInfoSchema = new mongoose.Schema({
   creditcards: [creditSchema],
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    unique: true
   }
 });
 

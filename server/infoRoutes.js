@@ -29,19 +29,20 @@ router.get('/creditCard/:id', (req, res) => {
 
 router.post('/address', async (req, res) => {
   const { addresses } = req.body
-  try{
-    const info = new UserInfo({ addresses, userId: req.user._id});
-    await info.save();
-    res.status(200).json(info);
-  } catch (err) {
-    res.status(400).send({ error: err.message })
-  }
+  const userId = req.user._id;
+  UserInfo.update({userId}, { addresses, userId }, { upsert: true })
+    .then(() => {
+      res.status(200).send('Upserted Address Info');
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    })
 });
 
-router.get('/address/:id', (req, res) => {
-  UserInfo.find({_id: req.params.id})
+router.get('/address', (req, res) => {
+  UserInfo.find({userId: req.user._id})
     .then((results) => {
-      res.status(200).json(results.data);
+      res.status(200).send(results[0].addresses);
     })
     .catch((err) => {
       res.status(400).send(err);

@@ -90,7 +90,6 @@ const setAddressInfo = (dispatch) =>  (address) => {
 
 const sendAddressInfo = (dispatch) => async (addresses) => {
   try {
-    console.log('Appointment Context Submission', addresses);
     await userApi.post('/address', {addresses})
   } catch (err) {
     console.log(err)
