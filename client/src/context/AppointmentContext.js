@@ -1,5 +1,6 @@
 import CreateDataContext from './CreateDataContext';
 import Yelp from '../api/yelpApi';
+import userApi from '../api/userApi';
 
 const AppointmentReducer = (state, action) => {
   switch (action.type) {
@@ -112,16 +113,16 @@ const setCurrentAddress = (dispatch) => async (userId) => {
 
 const submitOrder = (dispatch) => async (order) => {
   try {
-    await mongoApi.post(`/submit`, order);
+    await userApi.post('/submit', order);
     dispatch({type: 'submit_order', payload: order})
   } catch(err){
     console.log(err);
   }
 };
 
-const getHistory = (dispatch) => async (userId) => {
+const getHistory = (dispatch) => async () => {
   try {
-    const response = await mongoApi.get(`/history/${userId}`);
+    const response = await userApi.get('/history');
     dispatch({ type: 'get_history', payload: response.data });
   } catch (err) {
     console.log(err);

@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import {Button, Image} from 'react-native-elements';
 import { FontAwesome5, Foundation } from '@expo/vector-icons';
 import {Context as AppointmentContext} from '../context/AppointmentContext';
 
 
-const APlumber = ({business}) => {
+const APlumber = ( { business, navigation } ) => {
+  const [lat, setLat] = useState(0);
+  const [long, setLong] = useState(0);
   const { state, getBusiness } = useContext(AppointmentContext);
 
   return (
@@ -24,7 +26,7 @@ const APlumber = ({business}) => {
         }
         onPress={() => {
           getBusiness(business.id);
-          console.log(state.businessInfo);
+          navigation.navigate('Appointment');
         }}
       />
 
