@@ -8,9 +8,11 @@ const requireAuth = require('./requireAuth.js');
 router.use(requireAuth);
 
 router.post('/creditCard', (req, res) => {
-  UserInfo.create(req.body)
+  const { creditcards, addresses } = req.body;
+  const userId = req.user._id;
+  UserInfo.update({userId}, { creditcards, addresses, userId}, {upsert: true})
     .then(() => {
-      res.status(200).send('Credit card added!');
+      res.status(200).send('Credit card upserted!');
     })
     .catch((err) => {
       res.status(400).send(err);
@@ -28,19 +30,21 @@ router.get('/creditCard/:id', (req, res) => {
 });
 
 router.post('/address', (req, res) => {
-  const user = UserInfo.create(req.body)
+  const { addresses } = req.body
+  const userId = req.user._id;
+  UserInfo.update({userId}, { addresses, userId }, { upsert: true })
     .then(() => {
-      res.status(200).send('Address added!');
+      res.status(200).send('Upserted Address Info');
     })
     .catch((err) => {
       res.status(400).send(err);
     })
 });
 
-router.get('/address/:id', (req, res) => {
-  UserInfo.find({_id: req.params.id})
+router.get('/address', (req, res) => {
+  UserInfo.find({userId: req.user._id})
     .then((results) => {
-      res.status(200).json(results.data);
+      res.status(200).send(results[0].addresses);
     })
     .catch((err) => {
       res.status(400).send(err);
@@ -48,7 +52,10 @@ router.get('/address/:id', (req, res) => {
 });
 
 router.post('/submit', (req, res) => {
-  History.create(req.body)
+  const { businessId, appointmentReason, dateTime } = req.body;
+  const userId = req.user._id;
+
+  History.create({ businessId, appointmentReason, dateTime, userId })
     .then(() => {
       res.status(200).send('Posted to history!');
     })
@@ -57,13 +64,13 @@ router.post('/submit', (req, res) => {
     });
 });
 
-router.get('/history/:id', (res, req) => {
-  History.find({_id: req.params.id})
+router.get('/history', (req, res) => {
+  History.find({ userId: req.user._id })
     .then((results) => {
-      res.status(200).json(results.data);
+      res.status(200).json(results);
     })
     .catch((err) => {
-      res.status(400).send('Error for getting history!')
+      res.status(400).send(err)
     })
 })
 
