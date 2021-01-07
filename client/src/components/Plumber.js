@@ -5,6 +5,7 @@ import { Context as AppointmentContext } from '../context/AppointmentContext';
 import APlumber from './APlumber';
 
 
+
 const Plumber = ({ navigation }) => {
 
   const { state, getLocalBusiness } = useContext(AppointmentContext);
@@ -19,7 +20,10 @@ const Plumber = ({ navigation }) => {
         <View style={{paddingBottom: 255}}>
           {state.localBusinesses.map(business => {
             return (
+              <View style={styles.businesspanel}>
               <APlumber business={business} key={business.id} navigation={navigation}/>
+
+              </View>
             )
           })}
         </View>
@@ -31,6 +35,12 @@ const Plumber = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#CBDBFC',
+    borderWidth: 2
+  },
+  businesspanel: {
+    // flexDirection: 'row',
+    borderColor: 'red',
+    borderWidth: 2
   }
 });
 
