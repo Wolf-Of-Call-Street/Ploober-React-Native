@@ -5,6 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import {Context as AppointmentContext} from '../context/AppointmentContext';
 
 const Map = ({ currentLocation }) => {
+
   const lat = currentLocation.lat;
   const long = currentLocation.long;
   const location = {

@@ -6,7 +6,7 @@ import {Context as AppointmentContext} from '../context/AppointmentContext';
 import { requestPermissionsAsync } from 'expo-location';
 import Spacer from '../components/Spacer';
 
-const MapScreen = () => {
+const MapScreen = ({ navigation }) => {
   const [err, setErr] = useState(null);
   const [lat, setLat] = useState(0);
   const [long, setLong] = useState(0);
@@ -31,7 +31,7 @@ const MapScreen = () => {
         getLocalBusiness(position.coords.latitude, position.coords.longitude);
       })
   };
-  console.log(lat, long);
+  console.log(state.businessInfo, '000000000000AEFJ;OAWEJFA;WEFJEWAI;OFJAWEIOFJA;OIWEFJIO;AWEFJIO;AWEJFO;AFJWE');
   useEffect( () => {
     (async () =>  {
     await startLocationTracking();
@@ -46,7 +46,7 @@ const MapScreen = () => {
       <Map currentLocation={{ lat, long }}/>
       {err ? <Text style={styles.err}>Please enable location services!</Text> : null}
       <Spacer />
-      <Plumber />
+      <Plumber navigation={navigation}/>
     </View>
   )
 };
