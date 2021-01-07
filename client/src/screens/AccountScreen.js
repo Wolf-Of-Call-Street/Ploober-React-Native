@@ -12,9 +12,6 @@ const AccountScreen = ({ navigation }) => {
     getHistory();
   }, [])
 
-  // Need to query Yelp API to get name of business
-  // OR when we submit to history, we should include the name of the business
-
   const timeConverter = (timeInMs) => {
     let date = new Date(timeInMs);
     let day = date.getDate();
