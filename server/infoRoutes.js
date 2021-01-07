@@ -8,9 +8,11 @@ const requireAuth = require('./requireAuth.js');
 router.use(requireAuth);
 
 router.post('/creditCard', (req, res) => {
-  UserInfo.create(req.body)
+  const { creditcards, addresses } = req.body;
+  const userId = req.user._id;
+  UserInfo.update({userId}, { creditcards, addresses, userId}, {upsert: true})
     .then(() => {
-      res.status(200).send('Credit card added!');
+      res.status(200).send('Credit card upserted!');
     })
     .catch((err) => {
       res.status(400).send(err);
@@ -27,7 +29,7 @@ router.get('/creditCard/:id', (req, res) => {
     });
 });
 
-router.post('/address', async (req, res) => {
+router.post('/address', (req, res) => {
   const { addresses } = req.body
   const userId = req.user._id;
   UserInfo.update({userId}, { addresses, userId }, { upsert: true })

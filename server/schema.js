@@ -11,7 +11,7 @@ const addressSchema = new mongoose.Schema({
 
 const creditSchema = new mongoose.Schema({
   number: {
-    type: Number,
+    type: String,
     required: true
   },
   billingAddress: addressSchema,
