@@ -15,13 +15,16 @@ const creditSchema = new mongoose.Schema({
     required: true
   },
   billingAddress: addressSchema,
-  expDate: {
-    type: Number,
+  expiry: {
+    type: String,
     required: true
   },
   name: {
     type: String,
     required: true
+  },
+  type: {
+    type: String
   }
 });
 

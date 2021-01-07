@@ -79,16 +79,28 @@ const setAppointmentInfo = (dispatch) => (date, reason) => {
   dispatch({ type: 'set_appointment_info', payload: {date, reason}});
 };
 
-const setPaymentInfo = (dispatch) => async (cardInfo) => {
+const setPaymentInfo = (dispatch) => (address) => {
+  dispatch({type: 'set_payment_info', payload: cardInfo});
+};
+
+const sendPaymentInfo = (dispatch) => async (address) => {
   try {
     await userApi.post('/creditCard', {cardInfo})
-    dispatch({type: 'set_payment_info', payload: cardInfo});
   } catch (err) {
-    console.log(err)
+    console.log(err);
+  }
+}
+
+const getPaymentInfo = (dispatch) => async (userId) => {
+  try {
+    const response = await userApi.get(`/creditCard`);
+    dispatch({type: 'set_current_payment', payload: response.data});
+  } catch (err) {
+    console.log(err);
   }
 };
 
-const setAddressInfo = (dispatch) =>  (address) => {
+const setAddressInfo = (dispatch) => (address) => {
     dispatch({type: 'set_address_info', payload: address});
 };
 
@@ -109,14 +121,6 @@ const fetchAddresses = (dispatch) => async () => {
   }
 };
 
-const getPaymentInfo = (dispatch) => async (userId) => {
-  try {
-    const response = await userApi.get(`/creditCard/${userId}`);
-    dispatch({type: 'set_current_payment', payload: response.data});
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 const setCurrentAddress = (dispatch) => async (userId) => {
   try {
