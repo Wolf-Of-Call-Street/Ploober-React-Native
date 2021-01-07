@@ -86,8 +86,9 @@ const setPaymentInfo = (dispatch) => async (cardInfo) => {
 
 const setAddressInfo = (dispatch) =>  async (address) => {
   try {
-    await userApi.post('/address', {address})
+    console.log('Appointment Context Submission', address);
     dispatch({type: 'set_address_info', payload: address});
+    await userApi.post('/address', {address})
   } catch (err) {
     console.log(err)
   }

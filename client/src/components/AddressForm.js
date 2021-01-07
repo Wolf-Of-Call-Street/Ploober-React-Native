@@ -20,6 +20,7 @@ const AddressValidationSchema = Yup.object({
 })
 
 const AddressForm = ({ headerText, setAddressInfo, addresses }) => {
+  console.log('AddressForm addresses', addresses);
   return (
     <>
       <Spacer>
