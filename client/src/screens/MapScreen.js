@@ -31,15 +31,12 @@ const MapScreen = ({ navigation }) => {
         getLocalBusiness(position.coords.latitude, position.coords.longitude);
       })
   };
-  console.log(state.businessInfo, '000000000000AEFJ;OAWEJFA;WEFJEWAI;OFJAWEIOFJA;OIWEFJIO;AWEFJIO;AWEJFO;AFJWE');
   useEffect( () => {
     (async () =>  {
     await startLocationTracking();
     await getUserLocation();
         })()
   }, []);
-
-
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Plumbers Nearest You</Text>

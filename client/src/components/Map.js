@@ -2,10 +2,11 @@ import React, { useContext, useEffect } from 'react';
 import MapView from 'react-native-maps';
 import { Text } from 'react-native-elements';
 import { StyleSheet, View } from 'react-native';
-import {Context as AppointmentContext} from '../context/AppointmentContext';
+import { Context as AppointmentContext } from '../context/AppointmentContext';
+import { Marker } from 'react-native-maps';
 
 const Map = ({ currentLocation }) => {
-
+  const {state} = useContext(AppointmentContext);
   const lat = currentLocation.lat;
   const long = currentLocation.long;
   const location = {
@@ -15,14 +16,24 @@ const Map = ({ currentLocation }) => {
     longitudeDelta: 0.01
   };
 
-
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
         region={location}
         showsUserLocation={true}
-      />
+      >
+        {state.localBusinesses.map(marker => (
+          <Marker
+            title={marker.name}
+            key={marker.id}
+            coordinate={{
+              latitude: marker.coordinates.latitude,
+              longitude: marker.coordinates.longitude
+            }}
+          />
+        ))}
+      </MapView>
     </View>
   )
 };
