@@ -12,7 +12,6 @@ const MapScreen = ({ navigation }) => {
   const [long, setLong] = useState(0);
   const { state, getLocalBusiness } = useContext(AppointmentContext);
 
-
   const startLocationTracking = async () => {
     try {
       const {granted} = await requestPermissionsAsync();
