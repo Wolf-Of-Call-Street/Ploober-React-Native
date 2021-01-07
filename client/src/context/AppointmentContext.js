@@ -133,16 +133,16 @@ const setCurrentAddress = (dispatch) => async (userId) => {
 
 const submitOrder = (dispatch) => async (order) => {
   try {
-    await userApi.post(`/submit`, order);
+    await userApi.post('/submit', order);
     dispatch({type: 'submit_order', payload: order})
   } catch(err){
     console.log(err);
   }
 };
 
-const getHistory = (dispatch) => async (userId) => {
+const getHistory = (dispatch) => async () => {
   try {
-    const response = await userApi.get(`/history/${userId}`);
+    const response = await userApi.get('/history');
     dispatch({ type: 'get_history', payload: response.data });
   } catch (err) {
     console.log(err);

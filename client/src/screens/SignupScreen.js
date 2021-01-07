@@ -33,7 +33,6 @@ const SignupScreen = ({ navigation }) => {
         title="Already have an account? Move to Sign In"
         style={{ marginTop: 20, marginBottom: 20 }}
       />
-      <Button onPress={() => navigation.navigate('Map')} title="Map"/>
       <Button onPress={() => navigation.navigate('Appointment')} title="Appointment"/>
       <Button onPress={() => navigation.navigate('Confirmation')} title="Confirmation"/>
     </View>

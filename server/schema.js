@@ -29,7 +29,7 @@ const creditSchema = new mongoose.Schema({
 });
 
 const historySchema = new mongoose.Schema({
-  businessID: {
+  businessId: {
     type: String,
     required: true
   },
