@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   },
   ratings: {
     fontWeight: 'bold',
+    paddingTop: 12
   },
   reviews: {
     fontWeight: 'bold',
