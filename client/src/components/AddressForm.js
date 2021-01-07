@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
 import Spacer from '../components/Spacer';
@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 const AddressValidationSchema = Yup.object({
   line1: Yup.string().required(),
   line2: Yup.string().required(),
-  zip: Yup.string()
+  zipcode: Yup.string()
     .required()
     .min(5, 'The zip code you entered is too short'),
   city: Yup.string()
@@ -19,7 +19,7 @@ const AddressValidationSchema = Yup.object({
     .min(2, 'The state you entered is too short'),
 })
 
-const AddressForm = ({ headerText, additionalValidation, valid }) => {
+const AddressForm = ({ headerText, setAddressInfo, sendAddressInfo, addresses }) => {
   return (
     <>
       <Spacer>
@@ -31,13 +31,13 @@ const AddressForm = ({ headerText, additionalValidation, valid }) => {
         const initialValues={{
           line1: '',
           line2: '',
-          zip: '',
+          zipcode: '',
           city: '',
           state: ''
         }}
         validationSchema={AddressValidationSchema}
-        onSubmit={(values) => {
-          console.log('No Mistakes Here')
+        onSubmit={async (values) => {
+          setAddressInfo(values);
         }}
       >
         {(props) => (
@@ -65,12 +65,12 @@ const AddressForm = ({ headerText, additionalValidation, valid }) => {
             <Input
               label='Zip Code'
               placeholder='90045'
-              onChangeText={props.handleChange('zip')}
-              value={props.values.zip}
+              onChangeText={props.handleChange('zipcode')}
+              value={props.values.zipcode}
               containerStyle={styles.input}
             />
             <Text style={styles.errorText}>
-              {props.touched.zip && props.errors.zip}
+              {props.touched.zipcode && props.errors.zipcode}
             </Text>
             <Input
               label='City'

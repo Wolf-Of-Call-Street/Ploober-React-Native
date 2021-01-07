@@ -11,17 +11,20 @@ const addressSchema = new mongoose.Schema({
 
 const creditSchema = new mongoose.Schema({
   number: {
-    type: Number,
+    type: String,
     required: true
   },
   billingAddress: addressSchema,
-  expDate: {
-    type: Number,
+  expiry: {
+    type: String,
     required: true
   },
   name: {
     type: String,
     required: true
+  },
+  type: {
+    type: String
   }
 });
 
@@ -69,7 +72,8 @@ const userInfoSchema = new mongoose.Schema({
   creditcards: [creditSchema],
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    unique: true
   }
 });
 
