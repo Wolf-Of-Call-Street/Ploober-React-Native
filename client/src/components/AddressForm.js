@@ -19,7 +19,7 @@ const AddressValidationSchema = Yup.object({
     .min(2, 'The state you entered is too short'),
 })
 
-const AddressForm = ({ headerText, additionalValidation, valid }) => {
+const AddressForm = ({ headerText, setAddressInfo, addresses }) => {
   return (
     <>
       <Spacer>
@@ -37,7 +37,8 @@ const AddressForm = ({ headerText, additionalValidation, valid }) => {
         }}
         validationSchema={AddressValidationSchema}
         onSubmit={(values) => {
-          console.log('No Mistakes Here')
+          setAddressInfo(values);
+          console.log(addresses);
         }}
       >
         {(props) => (

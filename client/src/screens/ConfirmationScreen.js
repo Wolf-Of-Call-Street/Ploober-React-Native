@@ -48,7 +48,7 @@ const ConfirmationScreen = ({ navigation }) => {
         <Text h3 style={styles.center}>Payment Information</Text>
         <FlatList
           data={cardInfo}
-          keyExtractor={item => item.number}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => {
             <ListItem bottomDivider>
               <ListItem.Title>

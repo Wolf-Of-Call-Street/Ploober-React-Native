@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Keyboard, TouchableWithoutFeedback, ScrollView } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {
+KeyboardAwareScrollView
+} from 'react-native-keyboard-aware-scroll-view';
 import AddressForm from '../components/AddressForm';
+import { Context as AppointmentContext } from '../context/AppointmentContext';
 
 const AddressDetailScreen = () => {
+  const { state: { addresses }, setAddressInfo } = useContext(AppointmentContext);
+  console.log('addresses', JSON.stringify(addresses, null, " "));
   return (
     <KeyboardAwareScrollView
       enableOnAndroid
@@ -21,6 +26,8 @@ const AddressDetailScreen = () => {
           <AddressForm
             headerText='Enter Address'
             additionalValidation={false}
+            setAddressInfo={setAddressInfo}
+            addresses={addresses}
           />
         </ScrollView>
       </TouchableWithoutFeedback>
