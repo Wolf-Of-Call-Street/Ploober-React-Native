@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 import { Text, Button, ListItem } from 'react-native-elements'
 import { Context as AuthContext } from '../context/AuthContext';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
@@ -31,14 +32,20 @@ const AccountScreen = ({ navigation }) => {
   };
 
   return (
-    <View>
-      <View>
+    <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
+      <View style={styles.section}>
         <Text h2>Account Options:</Text>
-        <Button onPress={() => logout(() => navigation.navigate('Signin') )} title="Log Out"/>
+        <View style={{flex: 1}}/>
+        <Button
+          onPress={() => logout(() => navigation.navigate('Signin') )}
+          title="Log Out"
+          style={{ marginBottom: 20 }}
+        />
       </View>
-      <View>
+      <View style={styles.section, {flex: 3}}>
         <Text h2>Order History:</Text>
         <FlatList
+          style={styles.historyList}
           data={state.history}
           keyExtractor={(item) => item._id}
           renderItem={({ item }) => {
@@ -61,11 +68,22 @@ const AccountScreen = ({ navigation }) => {
           }}
         />
       </View>
-    </View>
+    </SafeAreaView>
   )
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  section: {
+    flex: 1,
+    marginTop: 20,
+    marginBottom: 10
+  },
+  historyList: {
+    flex: 1
+  },
   historyItem: {
     justifyContent: 'space-between'
   }
