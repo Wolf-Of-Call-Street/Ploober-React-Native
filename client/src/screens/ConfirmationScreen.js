@@ -60,7 +60,7 @@ const ConfirmationScreen = ({ navigation }) => {
           title="Add a New Address"
           onPress={() => {
             navigation.navigate('Address')
-            console.log({addresses})
+            console.log(addresses)
           }}
         />
       </Spacer>

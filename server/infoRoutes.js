@@ -27,14 +27,15 @@ router.get('/creditCard/:id', (req, res) => {
     });
 });
 
-router.post('/address', (req, res) => {
-  const user = UserInfo.create(req.body)
-    .then(() => {
-      res.status(200).send('Address added!');
-    })
-    .catch((err) => {
-      res.status(400).send(err);
-    })
+router.post('/address', async (req, res) => {
+  const { addresses } = req.body
+  try{
+    const info = new UserInfo({ addresses, userId: req.user._id});
+    await info.save();
+    res.status(200).json(info);
+  } catch (err) {
+    res.status(400).send({ error: err.message })
+  }
 });
 
 router.get('/address/:id', (req, res) => {
