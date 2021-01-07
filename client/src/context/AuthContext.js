@@ -46,11 +46,13 @@ const signin = (dispatch) => async ({ username, password }, navigateCallback) =>
   };
 };
 
-const tryLocalSignIn = (dispatch) => async (navigateCallback) => {
+const tryLocalSignIn = (dispatch) => async (navigateCallback, failCase) => {
   const token = await AsyncStorage.getItem('token');
   if (token) {
     dispatch({ type: 'signin', payload: token });
     navigateCallback();
+  } else {
+    failCase();
   }
 };
 

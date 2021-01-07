@@ -11,11 +11,11 @@ import AccountForm from '../components/AccountForm';
 const SignupScreen = ({ navigation }) => {
   const { state, signup, clearErrorMessage, tryLocalSignIn } = useContext(AuthContext);
 
-  useEffect(() => {
-    tryLocalSignIn(() => {
-      navigation.navigate('Map');
-    });
-  }, []);
+  // useEffect(() => {
+  //   tryLocalSignIn(() => {
+  //     navigation.navigate('Map');
+  //   });
+  // }, []);
 
   return (
     <View style={styles.container}>
