@@ -38,7 +38,6 @@ const AddressForm = ({ headerText, setAddressInfo, addresses }) => {
         validationSchema={AddressValidationSchema}
         onSubmit={(values) => {
           setAddressInfo(values);
-          console.log(addresses);
         }}
       >
         {(props) => (

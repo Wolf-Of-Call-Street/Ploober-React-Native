@@ -8,7 +8,6 @@ import { Context as AppointmentContext } from '../context/AppointmentContext';
 
 const AddressDetailScreen = () => {
   const { state: { addresses }, setAddressInfo } = useContext(AppointmentContext);
-  console.log('addresses', JSON.stringify(addresses, null, " "));
   return (
     <KeyboardAwareScrollView
       enableOnAndroid
