@@ -120,7 +120,7 @@ const submitOrder = (dispatch) => async (order) => {
   }
 };
 
-const getHistory = (dispatch) => async (userId) => {
+const getHistory = (dispatch) => async () => {
   try {
     const response = await userApi.get('/history');
     dispatch({ type: 'get_history', payload: response.data });
