@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet, FlatList, ScrollView, View, TouchableOpacity } from 'react-native';
 import { Card, Text, Button, ListItem, Divider } from 'react-native-elements';
 import Spacer from '../components/Spacer';
@@ -6,9 +6,12 @@ import {
   Context as AppointmentContext
 } from '../context/AppointmentContext';
 import { NavigationEvents } from 'react-navigation';
+import ConfirmModal from '../components/ConfirmModal';
 
 const ConfirmationScreen = ({ navigation }) => {
   const { state: { appointmentReason, dateTime, addresses }, fetchAddresses, state } = useContext(AppointmentContext);
+
+  const [showModal, setShowModal] = useState(false);
 
   const day = new Date(dateTime).toLocaleDateString('en-US', {
     day: 'numeric',
@@ -93,7 +96,15 @@ const ConfirmationScreen = ({ navigation }) => {
         </Spacer>
         <Divider />
         <Spacer>
-          <Button title="Confirm" />
+        <ConfirmModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
+          <Button title="Confirm"
+            onPress={
+              () => {setShowModal(true)}
+            }
+          />
         </Spacer>
       </ScrollView>
     </>
