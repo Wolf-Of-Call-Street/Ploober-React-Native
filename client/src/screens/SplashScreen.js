@@ -18,7 +18,6 @@ const SplashScreen = ({ navigation }) => {
     tryLocalSignIn(success, () => setReady(true))
   }, []);
 
-  console.log(ready);
   return (
     <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
       <Text>SPLAAAASH</Text>
