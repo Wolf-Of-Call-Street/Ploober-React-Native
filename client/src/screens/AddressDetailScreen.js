@@ -7,7 +7,7 @@ import AddressForm from '../components/AddressForm';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
 
 const AddressDetailScreen = () => {
-  const { state: { addresses }, setAddressInfo } = useContext(AppointmentContext);
+  const { state: { addresses }, setAddressInfo, sendAddressInfo } = useContext(AppointmentContext);
   return (
     <KeyboardAwareScrollView
       enableOnAndroid
@@ -26,6 +26,7 @@ const AddressDetailScreen = () => {
             headerText='Enter Address'
             additionalValidation={false}
             setAddressInfo={setAddressInfo}
+            sendAddressInfo={sendAddressInfo}
             addresses={addresses}
           />
         </ScrollView>

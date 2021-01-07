@@ -84,15 +84,18 @@ const setPaymentInfo = (dispatch) => async (cardInfo) => {
   }
 };
 
-const setAddressInfo = (dispatch) =>  async (address) => {
-  try {
-    console.log('Appointment Context Submission', address);
+const setAddressInfo = (dispatch) =>  (address) => {
     dispatch({type: 'set_address_info', payload: address});
-    await userApi.post('/address', {address})
+};
+
+const sendAddressInfo = (dispatch) => async (addresses) => {
+  try {
+    console.log('Appointment Context Submission', addresses);
+    await userApi.post('/address', {addresses})
   } catch (err) {
     console.log(err)
   }
-};
+}
 
 const getPaymentInfo = (dispatch) => async (userId) => {
   try {
@@ -132,7 +135,7 @@ const getHistory = (dispatch) => async (userId) => {
 
 export const { Provider, Context } = CreateDataContext(
   AppointmentReducer,
-  { getBusiness, getLocalBusiness, setAppointmentInfo, setPaymentInfo, setAddressInfo, setCurrentAddress, getPaymentInfo, setCurrentAddress, submitOrder, getHistory },
+  { getBusiness, getLocalBusiness, setAppointmentInfo, setPaymentInfo, setAddressInfo, setCurrentAddress, getPaymentInfo, setCurrentAddress, submitOrder, getHistory, sendAddressInfo },
   {
     localBusinesses: [],
     businessInfo: {},
