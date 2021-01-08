@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import MapView from 'react-native-maps';
-import { Text } from 'react-native-elements';
+import { Text, Image } from 'react-native-elements';
 import { StyleSheet, View } from 'react-native';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
 import { Marker } from 'react-native-maps';
@@ -15,6 +15,8 @@ const Map = ({ currentLocation }) => {
     latitudeDelta: 0.01,
     longitudeDelta: 0.01
   };
+
+  var dotImage = require('../../../assets/Toilet.png');
 
   return (
     <View style={styles.container}>
@@ -31,7 +33,9 @@ const Map = ({ currentLocation }) => {
               latitude: marker.coordinates.latitude,
               longitude: marker.coordinates.longitude
             }}
-          />
+          >
+            <Image source={dotImage} style={{height: 40, width: 40}}/>
+          </Marker>
         ))}
       </MapView>
     </View>
