@@ -9,7 +9,7 @@ import { NavigationEvents } from 'react-navigation';
 import ConfirmModal from '../components/ConfirmModal';
 
 const ConfirmationScreen = ({ navigation }) => {
-  const { state: { appointmentReason, dateTime, addresses, cardInfo }, fetchAddresses, fetchPaymentInfo, state } = useContext(AppointmentContext);
+  const { state: { appointmentReason, dateTime, addresses, cardInfo, currentAddress, currentPayment }, fetchAddresses, fetchPaymentInfo, setCurrentAddress, setCurrentPayment, state } = useContext(AppointmentContext);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -23,6 +23,7 @@ const ConfirmationScreen = ({ navigation }) => {
     hour: 'numeric',
     minute: '2-digit',
   });
+  console.log(state);
   return (
     <>
       <NavigationEvents
@@ -62,7 +63,9 @@ const ConfirmationScreen = ({ navigation }) => {
               keyExtractor={(item, index) => item._id || String(index)}
               renderItem={({ item }) => {
                 return (
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress ={() => setCurrentPayment(item)}
+                  >
                     <ListItem
                       key={item.item_id}
                       bottomDivider>
@@ -95,7 +98,11 @@ const ConfirmationScreen = ({ navigation }) => {
               keyExtractor={(item, index) => item._id || String(index)}
               renderItem={({ item }) => {
                 return (
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setCurrentAddress(item)
+                    }}
+                  >
                     <ListItem
                       key={item.item_id}
                       bottomDivider>
