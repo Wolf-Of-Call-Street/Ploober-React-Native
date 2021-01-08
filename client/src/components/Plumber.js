@@ -17,7 +17,7 @@ const Plumber = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <View style={{paddingBottom: 255}}>
+        <View style={{paddingBottom: 255}} >
           {state.localBusinesses.map(business => {
             return (
               <View style={styles.businesspanel}>

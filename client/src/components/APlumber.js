@@ -34,8 +34,7 @@ const APlumber = ( { business, navigation } ) => {
           />
         }
         onPress={() => {
-          getBusiness(business.id);
-          navigation.navigate('Appointment');
+          getBusiness(business.id, (() => navigation.navigate('Appointment')));
         }}
       />
 
