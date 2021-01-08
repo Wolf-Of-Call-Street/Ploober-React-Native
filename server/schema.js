@@ -53,6 +53,10 @@ const historySchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  businessName: {
+    type: String,
+    required: true
+  },
   appointmentReason: {
     type: String,
     required: true
@@ -61,7 +65,11 @@ const historySchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-
+  address: addressSchema,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 const userSchema = new mongoose.Schema({

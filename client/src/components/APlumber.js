@@ -34,8 +34,7 @@ const APlumber = ( { business, navigation } ) => {
           />
         }
         onPress={() => {
-          getBusiness(business.id);
-          navigation.navigate('Appointment');
+           getBusiness(business.id, navigation.navigate('Appointment'));
         }}
       />
 
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlign: 'center',
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   image: {
     flex: 1,

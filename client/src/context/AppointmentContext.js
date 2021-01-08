@@ -53,10 +53,11 @@ const AppointmentReducer = (state, action) => {
   }
 };
 
-const getBusiness = (dispatch) => async (id) => {
+const getBusiness = (dispatch) => async (id, next) => {
   try {
     const response = await Yelp.get(`/${id}`);
     dispatch({ type: 'get_business', payload: response.data });
+    next();
   } catch(err) {
     console.log(err);
   }

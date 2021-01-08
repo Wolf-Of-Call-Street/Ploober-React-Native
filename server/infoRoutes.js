@@ -54,10 +54,10 @@ router.get('/address', (req, res) => {
 });
 
 router.post('/submit', (req, res) => {
-  const { businessId, appointmentReason, dateTime } = req.body;
+  const { businessId, businessName, appointmentReason, dateTime, address } = req.body;
   const userId = req.user._id;
 
-  History.create({ businessId, appointmentReason, dateTime, userId })
+  History.create({ businessId, businessName, appointmentReason, dateTime, address, userId })
     .then(() => {
       res.status(200).send('Posted to history!');
     })
