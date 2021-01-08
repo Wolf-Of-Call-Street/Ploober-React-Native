@@ -34,7 +34,10 @@ const Map = ({ currentLocation }) => {
               longitude: marker.coordinates.longitude
             }}
           >
-            <Image source={dotImage} style={{height: 40, width: 40}}/>
+            <Image
+              source={dotImage}
+              style={{height: 40, width: 40}}
+            />
           </Marker>
         ))}
       </MapView>
