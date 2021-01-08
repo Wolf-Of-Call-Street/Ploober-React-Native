@@ -36,6 +36,14 @@ const creditSchema = new mongoose.Schema({
   }
 });
 
+const multiCreditSchema = new mongoose.Schema({
+  creditcards: [ creditSchema ],
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+})
+
 const historySchema = new mongoose.Schema({
   businessId: {
     type: String,
@@ -74,17 +82,6 @@ const userSchema = new mongoose.Schema({
     required: true
   }
 });
-
-// Remove after creating working, separate address and card schemas
-// const userInfoSchema = new mongoose.Schema({
-//   addresses: [addressSchema],
-//   creditcards: [creditSchema],
-//   userId: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: 'User',
-//     unique: true
-//   }
-// });
 
 userSchema.pre('save', function(next) {
   const user = this;
@@ -126,6 +123,7 @@ userSchema.methods.comparePassword = function(potentialPassword) {
 
 const User = mongoose.model('User', userSchema);
 const Address = mongoose.model('Address', multiAddressSchema);
+const Credit = mongoose.model('Credit', multiCreditSchema);
 const History = mongoose.model('History', historySchema);
 
-module.exports = { User, Address, History };
+module.exports = { User, Address, Credit, History };

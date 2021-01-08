@@ -24,9 +24,9 @@ const AppointmentReducer = (state, action) => {
       return {
         ...state, addresses: [...state.addresses, action.payload]
       };
-    case 'set_current_payment':
+    case 'fetch_payment_info':
       return {
-        ...state, currentCardInfo: action.payload
+        ...state, cardInfo: action.payload
       };
     case 'set_current_address':
       return {
@@ -91,10 +91,10 @@ const sendPaymentInfo = (dispatch) => async (address) => {
   }
 }
 
-const getPaymentInfo = (dispatch) => async (userId) => {
+const fetchPaymentInfo = (dispatch) => async (userId) => {
   try {
-    const response = await userApi.get(`/creditCard`);
-    dispatch({type: 'set_current_payment', payload: response.data});
+    const response = await userApi.get('/credit');
+    dispatch({type: 'fetch_payment_info', payload: response.data[0].creditcards});
   } catch (err) {
     console.log(err);
   }
@@ -151,7 +151,7 @@ const getHistory = (dispatch) => async () => {
 
 export const { Provider, Context } = CreateDataContext(
   AppointmentReducer,
-  { getBusiness, getLocalBusiness, setAppointmentInfo, setPaymentInfo, setAddressInfo, setCurrentAddress, getPaymentInfo, setCurrentAddress, submitOrder, getHistory, sendAddressInfo, fetchAddresses },
+  { getBusiness, getLocalBusiness, setAppointmentInfo, setPaymentInfo, setAddressInfo, setCurrentAddress, fetchPaymentInfo, setCurrentAddress, submitOrder, getHistory, sendAddressInfo, fetchAddresses },
   {
     localBusinesses: [],
     businessInfo: {},

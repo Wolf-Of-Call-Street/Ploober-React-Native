@@ -9,7 +9,7 @@ import { NavigationEvents } from 'react-navigation';
 import ConfirmModal from '../components/ConfirmModal';
 
 const ConfirmationScreen = ({ navigation }) => {
-  const { state: { appointmentReason, dateTime, addresses }, fetchAddresses, state } = useContext(AppointmentContext);
+  const { state: { appointmentReason, dateTime, addresses, cardInfo }, fetchAddresses, fetchPaymentInfo, state } = useContext(AppointmentContext);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -23,11 +23,13 @@ const ConfirmationScreen = ({ navigation }) => {
     hour: 'numeric',
     minute: '2-digit',
   });
-
   return (
     <>
       <NavigationEvents
-        onWillFocus={fetchAddresses}
+        onWillFocus={() => {
+          fetchAddresses();
+          fetchPaymentInfo();
+        }}
       />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -54,6 +56,31 @@ const ConfirmationScreen = ({ navigation }) => {
         <Divider />
         <Spacer>
           <Text h3 style={styles.center}>Payment Information</Text>
+          <Spacer>
+            <FlatList
+              data={cardInfo}
+              keyExtractor={(item, index) => item._id || String(index)}
+              renderItem={({ item }) => {
+                return (
+                  <TouchableOpacity>
+                    <ListItem
+                      key={item.item_id}
+                      bottomDivider>
+                      <ListItem.Content>
+                        <ListItem.Title>
+                          {item.number}
+                        </ListItem.Title>
+                        <ListItem.Subtitle>
+                          {item.type}, {item.expiry} {item.name}
+                        </ListItem.Subtitle>
+                      </ListItem.Content>
+                    </ListItem>
+                  </TouchableOpacity>
+                )
+              }}
+            >
+            </FlatList>
+          </Spacer>
           <Button
             title="Add a New Card"
             onPress={() => navigation.navigate('Card')}
@@ -96,13 +123,13 @@ const ConfirmationScreen = ({ navigation }) => {
         </Spacer>
         <Divider />
         <Spacer>
-        <ConfirmModal
-          showModal={showModal}
-          setShowModal={setShowModal}
-        />
+          <ConfirmModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
           <Button title="Confirm"
             onPress={
-              () => {setShowModal(true)}
+              () => { setShowModal(true) }
             }
           />
         </Spacer>
