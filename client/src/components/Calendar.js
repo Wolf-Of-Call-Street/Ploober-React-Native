@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { View, Text } from 'react-native';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import { Context as AppointmentContext } from '../context/AppointmentContext';
 
 
 
 const CalendarModule = () => {
 
-  const [dateTime, setDateTime] = useState(0);
+  const {state} = useContext(AppointmentContext);
   const [monthYear, setMonthYear] = useState(0);
   const [time, setTime] = useState(0);
 
@@ -24,6 +25,10 @@ const CalendarModule = () => {
         pagingEnabled={true}
         hideExtraDays={true}
       />
+      {/* <select value={this.state.gender} onChange={this.handleChange}>
+        <option name="male"> Male</option>
+        <option name="female">Female</option>
+      </select> */}
     </View>
   )
 };
