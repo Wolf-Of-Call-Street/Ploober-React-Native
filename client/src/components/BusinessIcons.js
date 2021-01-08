@@ -21,7 +21,7 @@ const BusinessIcon = ({info}) => {
     />
     </Text>
     <Text style={styles.reviews}>{info.reviews} Reviews</Text>
-    <Button style={styles.phone} title={info.phone} />
+    <Button style={styles.phone} title={info.phone} onPress={() => {Linking.openURL(`tel:${info.phone}`)}}/>
     </View>
   )
 };
