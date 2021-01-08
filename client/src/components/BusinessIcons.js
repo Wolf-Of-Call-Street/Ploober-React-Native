@@ -11,10 +11,10 @@ const BusinessIcon = ({info}) => {
     <View style={styles.orientation}>
     <Text style={styles.ratings}>
       <StarRating
-      maxStars={5}
-      rating={info.rating}
-      starSize={20}
-      fullStarColor='#FDCC0D'
+        maxStars={5}
+        rating={info.rating}
+        starSize={20}
+        fullStarColor='#D6AA0F'
       starStyle={{
         paddingTop: 5
       }}

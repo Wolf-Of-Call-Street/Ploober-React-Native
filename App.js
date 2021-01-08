@@ -12,8 +12,8 @@ import AddressDetailScreen from './client/src/screens/AddressDetailScreen';
 import { Provider as AppointmentProvider } from './client/src/context/AppointmentContext';
 import { Provider as AuthProvider } from './client/src/context/AuthContext';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-'
+// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
 
 
 const switchNavigator = createSwitchNavigator({
@@ -32,6 +32,7 @@ const switchNavigator = createSwitchNavigator({
     Account: AccountScreen
   })
 });
+
 
 const App =  createAppContainer(switchNavigator);
 
