@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, FlatList, ScrollView, View, TouchableOpacity } from 'react-native';
-import { Card, Text, Button, ListItem, Divider } from 'react-native-elements';
+import { StyleSheet, FlatList, ScrollView, View, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { Card, Text, Button, ListItem, Divider} from 'react-native-elements';
 import Spacer from '../components/Spacer';
 import {
   Context as AppointmentContext
@@ -13,6 +13,7 @@ const ConfirmationScreen = ({ navigation }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [order, setOrder] = useState({});
+  const [toggle, setToggle] = useState(false);
 
   const day = new Date(dateTime).toLocaleDateString('en-US', {
     day: 'numeric',
@@ -66,6 +67,8 @@ const ConfirmationScreen = ({ navigation }) => {
               renderItem={({ item }) => {
                 return (
                   <TouchableOpacity
+                    activeOpacity={0.6}
+                    underlayColor="#DDDDDD"
                     onPress ={() => setCurrentPayment(item)}
                   >
                     <ListItem
@@ -73,12 +76,16 @@ const ConfirmationScreen = ({ navigation }) => {
                       bottomDivider>
                       <ListItem.Content>
                         <ListItem.Title>
-                          {item.number}
+                          {item.type.charAt(0).toUpperCase() + item.type.slice(1)} ending in {item.number.slice(-4)}
                         </ListItem.Title>
                         <ListItem.Subtitle>
-                          {item.type}, {item.expiry} {item.name}
+                          Exp: {item.expiry.slice(0,2) + '/' + item.expiry.slice(2,4)}
                         </ListItem.Subtitle>
                       </ListItem.Content>
+                      <ListItem.CheckBox
+                        checked={toggle}
+                        onPress={ () => setToggle(!toggle) }
+                      />
                     </ListItem>
                   </TouchableOpacity>
                 )
@@ -100,7 +107,7 @@ const ConfirmationScreen = ({ navigation }) => {
               keyExtractor={(item, index) => item._id || String(index)}
               renderItem={({ item }) => {
                 return (
-                  <TouchableOpacity
+                  <TouchableHighlight
                     onPress={() => {
                       setCurrentAddress(item)
                     }}
@@ -116,8 +123,11 @@ const ConfirmationScreen = ({ navigation }) => {
                           {item.city}, {item.state} {item.zipcode}
                         </ListItem.Subtitle>
                       </ListItem.Content>
+                      <ListItem.CheckBox
+                      checked={toggle}
+                      onPress={ () => setToggle(!toggle) }/>
                     </ListItem>
-                  </TouchableOpacity>
+                  </TouchableHighlight>
                 )
               }}
             >
