@@ -10,7 +10,7 @@ const addressSchema = new mongoose.Schema({
 });
 
 const multiAddressSchema = new mongoose.Schema({
-  addresses: [addressSchema],
+  addresses: [ addressSchema ],
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -39,6 +39,14 @@ const creditSchema = new mongoose.Schema({
     ref: 'User'
   }
 });
+
+const multiCreditSchema = new mongoose.Schema({
+  creditcards: [ creditSchema ],
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+})
 
 const historySchema = new mongoose.Schema({
   businessId: {
@@ -75,16 +83,6 @@ const userSchema = new mongoose.Schema({
     required: true
   }
 });
-
-// const userInfoSchema = new mongoose.Schema({
-//   addresses: [addressSchema],
-//   creditcards: [creditSchema],
-//   userId: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: 'User',
-//     unique: true
-//   }
-// });
 
 userSchema.pre('save', function(next) {
   const user = this;

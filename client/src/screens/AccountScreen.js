@@ -54,11 +54,6 @@ const AccountScreen = ({ navigation }) => {
           }}
         />
       </View>
-      {/* FOR TESTING PURPOSES ONLY REMOVE THIS LATER */}
-      <Button
-        onPress={() => navigation.navigate('Confirmation')}
-        title="Confirmation"
-      />
     </View>
   )
 };

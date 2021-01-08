@@ -24,14 +24,18 @@ const AppointmentReducer = (state, action) => {
       return {
         ...state, addresses: [...state.addresses, action.payload]
       };
-    case 'set_current_payment':
+    case 'fetch_payment_info':
       return {
-        ...state, currentCardInfo: action.payload
+        ...state, cardInfo: action.payload
       };
     case 'set_current_address':
       return {
         ...state, currentAddress: action.payload
       };
+    case 'set_current_payment':
+      return{
+        ...state, currentPayment: action.payload
+      }
     case 'submit_order':
       return {
         ...state, history: [...state.history, action.payload]
@@ -79,8 +83,12 @@ const setAppointmentInfo = (dispatch) => (date, reason) => {
   dispatch({ type: 'set_appointment_info', payload: {date, reason}});
 };
 
-const setPaymentInfo = (dispatch) => (address) => {
-  dispatch({type: 'set_payment_info', payload: cardInfo});
+const setCurrentPayment = (dispatch) => (payment) => {
+  dispatch({type: 'set_current_payment', payload: payment});
+};
+
+const setPaymentInfo = (dispatch) => (card) => {
+  dispatch({type: 'set_payment_info', payload: card});
 };
 
 const sendPaymentInfo = (dispatch) => async (address) => {
@@ -91,10 +99,10 @@ const sendPaymentInfo = (dispatch) => async (address) => {
   }
 }
 
-const getPaymentInfo = (dispatch) => async (userId) => {
+const fetchPaymentInfo = (dispatch) => async (userId) => {
   try {
-    const response = await userApi.get(`/creditCard`);
-    dispatch({type: 'set_current_payment', payload: response.data});
+    const response = await userApi.get('/credit');
+    dispatch({type: 'fetch_payment_info', payload: response.data[0].creditcards});
   } catch (err) {
     console.log(err);
   }
@@ -115,20 +123,14 @@ const sendAddressInfo = (dispatch) => async (addresses) => {
 const fetchAddresses = (dispatch) => async () => {
   try{
     const response = await userApi.get('/address');
-    dispatch({ type: 'fetch_addresses', payload: response.data});
+      await dispatch({ type: 'fetch_addresses', payload: response.data[0].addresses});
   } catch (err) {
     console.log(err);
   }
 };
 
-
-const setCurrentAddress = (dispatch) => async (userId) => {
-  try {
-    const response = await userApi.get(`/address/${userId}`);
-    dispatch({type: 'set_current_address', payload: response.data});
-  } catch (err) {
-    console.log(err);
-  }
+const setCurrentAddress = (dispatch) => (address) => {
+    dispatch({type: 'set_current_address', payload: address});
 };
 
 const submitOrder = (dispatch) => async (order) => {
@@ -151,7 +153,7 @@ const getHistory = (dispatch) => async () => {
 
 export const { Provider, Context } = CreateDataContext(
   AppointmentReducer,
-  { getBusiness, getLocalBusiness, setAppointmentInfo, setPaymentInfo, setAddressInfo, setCurrentAddress, getPaymentInfo, setCurrentAddress, submitOrder, getHistory, sendAddressInfo, fetchAddresses },
+  { getBusiness, getLocalBusiness, setAppointmentInfo, setCurrentPayment, setAddressInfo, setCurrentAddress, fetchPaymentInfo, setCurrentAddress, submitOrder, getHistory, sendAddressInfo, fetchAddresses },
   {
     localBusinesses: [],
     businessInfo: {},
@@ -160,7 +162,7 @@ export const { Provider, Context } = CreateDataContext(
     addresses: [],
     currentAddress: {},
     cardInfo: [],
-    currentCardInfo: {},
+    currentPayment: {},
     history: []
   }
 );
