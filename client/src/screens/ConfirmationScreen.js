@@ -65,7 +65,7 @@ const ConfirmationScreen = ({ navigation }) => {
           <Spacer>
             <FlatList
               data={addresses}
-              keyExtractor={item => item._id}
+              keyExtractor={(item, index) => item._id || String(index)}
               renderItem={({ item }) => {
                 return (
                   <TouchableOpacity>
@@ -74,7 +74,7 @@ const ConfirmationScreen = ({ navigation }) => {
                       bottomDivider>
                       <ListItem.Content>
                         <ListItem.Title>
-                          {item.line1} {item.line}
+                          {item.line1}
                         </ListItem.Title>
                         <ListItem.Subtitle>
                           {item.city}, {item.state} {item.zipcode}

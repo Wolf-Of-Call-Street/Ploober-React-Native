@@ -115,7 +115,7 @@ const sendAddressInfo = (dispatch) => async (addresses) => {
 const fetchAddresses = (dispatch) => async () => {
   try{
     const response = await userApi.get('/address');
-    dispatch({ type: 'fetch_addresses', payload: response.data});
+      await dispatch({ type: 'fetch_addresses', payload: response.data[0].addresses});
   } catch (err) {
     console.log(err);
   }

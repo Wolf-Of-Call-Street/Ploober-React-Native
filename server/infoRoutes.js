@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const UserInfo = require('./schema.js').UserInfo;
 const History = require('./schema.js').History;
+const Address = require('./schema.js').Address;
 const mongoose = require('mongoose');
 const config = require('./config.json');
 const requireAuth = require('./requireAuth.js');
@@ -32,7 +32,7 @@ router.get('/creditCard/:id', (req, res) => {
 router.post('/address', (req, res) => {
   const { addresses } = req.body
   const userId = req.user._id;
-  UserInfo.update({userId}, { addresses, userId }, { upsert: true })
+  Address.update({userId}, { addresses, userId }, { upsert: true })
     .then(() => {
       res.status(200).send('Upserted Address Info');
     })
@@ -42,9 +42,10 @@ router.post('/address', (req, res) => {
 });
 
 router.get('/address', (req, res) => {
-  UserInfo.find({userId: req.user._id})
+  Address.find({userId: req.user._id})
     .then((results) => {
-      res.status(200).send(results[0].addresses);
+      // res.status(200).send(results[0].addresses);
+      res.status(200).send(results);
     })
     .catch((err) => {
       res.status(400).send(err);
