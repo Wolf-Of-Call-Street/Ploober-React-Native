@@ -31,6 +31,9 @@ const signup = (dispatch) => async ({ username, password, firstName, lastName },
     changeState(false);
     navigateCallback();
   } catch (err) {
+
+    changeState(false);
+
     dispatch({ type: 'add_error', payload: 'Something went wrong with signing up!' });
   };
 };
@@ -44,6 +47,9 @@ const signin = (dispatch) => async ({ username, password }, navigateCallback, ch
     changeState(false);
     navigateCallback();
   } catch (err) {
+
+    changeState(false);
+
     dispatch({ type: 'add_error', payload: 'Something went wrong with signing in!'});
   };
 };
