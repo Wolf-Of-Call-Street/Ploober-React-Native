@@ -1,34 +1,64 @@
-import React, {useState, useContext} from 'react';
-import { View, Text } from 'react-native';
+import React, {useState, useContext, Component} from 'react';
+import { View, Text, Button } from 'react-native';
+import DatePicker from 'react-native-datepicker';
+// import TimePicker from 'react-native-datetimepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
 
 
 
-const CalendarModule = () => {
+const CalendarModule = ({dateTime, setDateTime}) => {
 
   const {state} = useContext(AppointmentContext);
   const [monthYear, setMonthYear] = useState(0);
   const [time, setTime] = useState(0);
 
+
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setDate(currentDate);
+    setDateTime(currentDate.getTime());
+
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
+
   return (
     <View>
-      <CalendarList
-        minDate={Date()}
-        onDayPress={(day) => {
-          setMonthYear(day.timestamp)
-        }}
-        monthFormat={'MMMM yyyy'}
-        pastScrollRange={0}
-        futureScrollRange={6}
-        horizontal={true}
-        pagingEnabled={true}
-        hideExtraDays={true}
-      />
-      {/* <select value={this.state.gender} onChange={this.handleChange}>
-        <option name="male"> Male</option>
-        <option name="female">Female</option>
-      </select> */}
+      <Text>{date.toLocaleDateString()} at {date.toLocaleTimeString()}</Text>
+      <View>
+        <Button name="Calendar Button" onPress={showDatepicker} title="Choose Date" />
+      </View>
+      <View>
+        <Button name="Calendar Button" onPress={showTimepicker} title="Choose Time" />
+      </View>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          date={new Date()}
+          minimumDate={new Date()}
+          onChange={onChange}
+        />
+      )}
     </View>
   )
 };

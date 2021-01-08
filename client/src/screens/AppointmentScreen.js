@@ -18,7 +18,7 @@ const AppointmentScreen = ({navigation}) => {
       {/* {console.log(state.businessInfo)} */}
       <PlumberInfo />
       <Issue issue={issue} setIssue={setIssue}/>
-      <CalendarModule />
+      <CalendarModule dateTime={dateTime} setDateTime={setDateTime}/>
       <Confirm navigation={navigation} setAppointmentInfo={setAppointmentInfo} issue={issue} dateTime={dateTime}/>
     </View>
   )

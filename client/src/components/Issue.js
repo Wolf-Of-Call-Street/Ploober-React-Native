@@ -14,7 +14,6 @@ const Issue = ({issue, setIssue}) => {
         value={issue}
         onChangeText={setIssue}
       />
-      {console.log(issue)}
     </View>
   )
 };
