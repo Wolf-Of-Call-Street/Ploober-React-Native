@@ -7,15 +7,13 @@ import AddressForm from '../components/AddressForm';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
 
 const AddressDetailScreen = () => {
-  const { state: { addresses }, setAddressInfo, sendAddressInfo, state } = useContext(AppointmentContext);
+  const { state: { addresses }, setAddressInfo, sendAddressInfo } = useContext(AppointmentContext);
 
   useEffect(() => {
       if (addresses.length) {
         sendAddressInfo(addresses);
       }
   }, [addresses]);
-
-  console.log('Address Detail Screen', state.addresses);
 
   return (
     <KeyboardAwareScrollView

@@ -22,9 +22,9 @@ router.post('/credit', (req, res) => {
 });
 
 router.get('/credit', (req, res) => {
-  Credit.find({ userId: req.user._id})
+  Credit.find({ userId: req.params.id})
     .then((results) => {
-      res.status(200).send(results[0].creditcards);
+      res.status(200).send(results.data);
     })
     .catch((err) => {
       res.status(400).send(err);

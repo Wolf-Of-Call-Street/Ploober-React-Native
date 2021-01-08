@@ -1,10 +1,4 @@
-import React, { useContext } from 'react';
-import { Text } from 'react-native-elements'
-import AddressForm from '../components/AddressForm';
-import Spacer from '../components/Spacer';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { CreditCardInput } from 'react-native-vertical-credit-card-input';
-import { Context as AppointmentContext } from '../context/AppointmentContext';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -12,12 +6,18 @@ import {
   TouchableWithoutFeedback,
   ScrollView,
 } from 'react-native';
+import { Text } from 'react-native-elements'
+import AddressForm from '../components/AddressForm';
+import Spacer from '../components/Spacer';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {
+  CreditCardInput
+} from 'react-native-vertical-credit-card-input';
 
-const _onChange = (formData) => console.log(formData);
+const _onChange = (formData) =>
+  console.log(formData);
 
 const CardDetailScreen = () => {
-  const { state: { businessInfo, cardInfo}, setPaymentInfo, sendPaymentInfo } = useContext(AppointmentContext);
-
   return (
     <KeyboardAwareScrollView
       enableOnAndroid
@@ -49,7 +49,8 @@ const CardDetailScreen = () => {
           />
           <AddressForm
             headerText='Enter Billing Address'
-
+            additionalValidation
+            valid
           />
         </ScrollView>
       </TouchableWithoutFeedback>

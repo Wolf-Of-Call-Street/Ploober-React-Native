@@ -2,12 +2,14 @@ import React, { useContext, useState } from 'react';
 import { StyleSheet, FlatList, ScrollView, View, TouchableOpacity } from 'react-native';
 import { Card, Text, Button, ListItem, Divider } from 'react-native-elements';
 import Spacer from '../components/Spacer';
-import { Context as AppointmentContext } from '../context/AppointmentContext';
+import {
+  Context as AppointmentContext
+} from '../context/AppointmentContext';
 import { NavigationEvents } from 'react-navigation';
 import ConfirmModal from '../components/ConfirmModal';
 
 const ConfirmationScreen = ({ navigation }) => {
-  const { state: { appointmentReason, dateTime, addresses, cardInfo }, fetchAddresses, fetchCreditCards } = useContext(AppointmentContext);
+  const { state: { appointmentReason, dateTime, addresses }, fetchAddresses, state } = useContext(AppointmentContext);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -25,10 +27,7 @@ const ConfirmationScreen = ({ navigation }) => {
   return (
     <>
       <NavigationEvents
-        onWillFocus={() => {
-          fetchCreditCards();
-          fetchAddresses();
-        }}
+        onWillFocus={fetchAddresses}
       />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -55,28 +54,6 @@ const ConfirmationScreen = ({ navigation }) => {
         <Divider />
         <Spacer>
           <Text h3 style={styles.center}>Payment Information</Text>
-          <Spacer>
-            <FlatList
-              data={cardInfo}
-              keyExtractor={item => item._id}
-              renderItem={({ item }) => {
-                return (
-                  <TouchableOpacity>
-                    <ListItem
-                      key={item._id}
-                      bottomDivider>
-                      <ListItem.Content>
-                        <ListItem.Title>
-                          {item.type.charAt(0).toUpperCase() + item.type.slice(1)} ending in {item.number}
-                        </ListItem.Title>
-                      </ListItem.Content>
-                    </ListItem>
-                  </TouchableOpacity>
-                )
-              }}
-            >
-            </FlatList>
-          </Spacer>
           <Button
             title="Add a New Card"
             onPress={() => navigation.navigate('Card')}
@@ -93,15 +70,12 @@ const ConfirmationScreen = ({ navigation }) => {
                 return (
                   <TouchableOpacity>
                     <ListItem
-                      key={item._id}
+                      key={item.item_id}
                       bottomDivider>
                       <ListItem.Content>
                         <ListItem.Title>
-                          {item.line1}
+                          {item.line1} {item.line}
                         </ListItem.Title>
-                        <ListItem.Subtitle>
-                          {item.line2}
-                        </ListItem.Subtitle>
                         <ListItem.Subtitle>
                           {item.city}, {item.state} {item.zipcode}
                         </ListItem.Subtitle>
@@ -122,13 +96,13 @@ const ConfirmationScreen = ({ navigation }) => {
         </Spacer>
         <Divider />
         <Spacer>
-          <ConfirmModal
-            showModal={showModal}
-            setShowModal={setShowModal}
-          />
+        <ConfirmModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
           <Button title="Confirm"
             onPress={
-              () => { setShowModal(true) }
+              () => {setShowModal(true)}
             }
           />
         </Spacer>

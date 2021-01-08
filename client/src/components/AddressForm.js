@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 
 const AddressValidationSchema = Yup.object({
   line1: Yup.string().required(),
-  line2: Yup.string(),
+  line2: Yup.string().required(),
   zipcode: Yup.string()
     .required()
     .min(5, 'The zip code you entered is too short'),
@@ -59,6 +59,9 @@ const AddressForm = ({ headerText, setAddressInfo, sendAddressInfo, addresses })
               value={props.values.line2}
               containerStyle={styles.input}
             />
+            <Text style={styles.errorText}>
+              {props.touched.line2 && props.errors.line2}
+            </Text>
             <Input
               label='Zip Code'
               placeholder='90045'
