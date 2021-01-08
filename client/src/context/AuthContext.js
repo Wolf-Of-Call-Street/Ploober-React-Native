@@ -22,35 +22,45 @@ const clearErrorMessage = (dispatch) => () => {
   dispatch({ type: 'clear_error_message' });
 };
 
-const signup = (dispatch) => async ({ username, password, firstName, lastName }, navigateCallback) => {
+const signup = (dispatch) => async ({ username, password, firstName, lastName }, navigateCallback, changeState) => {
   try {
     const response = await userApi.post('/signup', { username, password, firstName, lastName });
     await AsyncStorage.setItem('token', response.data.token);
     dispatch({ type: 'signin', payload: response.data.token });
 
+    changeState(false);
     navigateCallback();
   } catch (err) {
+
+    changeState(false);
+
     dispatch({ type: 'add_error', payload: 'Something went wrong with signing up!' });
   };
 };
 
-const signin = (dispatch) => async ({ username, password }, navigateCallback) => {
+const signin = (dispatch) => async ({ username, password }, navigateCallback, changeState) => {
   try {
     const response = await userApi.post('/signin', { username, password });
     await AsyncStorage.setItem('token', response.data.token);
     dispatch({ type: 'signin', payload: response.data.token });
 
+    changeState(false);
     navigateCallback();
   } catch (err) {
+
+    changeState(false);
+
     dispatch({ type: 'add_error', payload: 'Something went wrong with signing in!'});
   };
 };
 
-const tryLocalSignIn = (dispatch) => async (navigateCallback) => {
+const tryLocalSignIn = (dispatch) => async (navigateCallback, failCase) => {
   const token = await AsyncStorage.getItem('token');
   if (token) {
     dispatch({ type: 'signin', payload: token });
     navigateCallback();
+  } else {
+    failCase();
   }
 };
 

@@ -20,9 +20,8 @@ const Plumber = ({ navigation }) => {
         <View style={{paddingBottom: 255}} >
           {state.localBusinesses.map(business => {
             return (
-              <View style={styles.businesspanel}>
-              <APlumber business={business} key={business.id} navigation={navigation}/>
-
+              <View style={styles.businesspanel} key={business.id}>
+                <APlumber business={business}  navigation={navigation}/>
               </View>
             )
           })}
@@ -35,12 +34,13 @@ const Plumber = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#CBDBFC',
-    borderWidth: 2
+    borderWidth: 2,
+    padding: 5
   },
   businesspanel: {
     // flexDirection: 'row',
-    borderColor: 'red',
-    borderWidth: 2
+    marginBottom: 10,
+    borderBottomWidth: 2
   }
 });
 

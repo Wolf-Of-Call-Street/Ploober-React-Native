@@ -6,8 +6,16 @@ const addressSchema = new mongoose.Schema({
   line2: String,
   zipcode: String,
   state: String,
-  city: String
+  city: String,
 });
+
+const multiAddressSchema = new mongoose.Schema({
+  addresses: [ addressSchema ],
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+})
 
 const creditSchema = new mongoose.Schema({
   number: {
@@ -25,11 +33,27 @@ const creditSchema = new mongoose.Schema({
   },
   type: {
     type: String
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 });
 
+const multiCreditSchema = new mongoose.Schema({
+  creditcards: [ creditSchema ],
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+})
+
 const historySchema = new mongoose.Schema({
   businessId: {
+    type: String,
+    required: true
+  },
+  businessName: {
     type: String,
     required: true
   },
@@ -41,6 +65,7 @@ const historySchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  address: addressSchema,
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -64,16 +89,6 @@ const userSchema = new mongoose.Schema({
   lastName: {
     type: String,
     required: true
-  }
-});
-
-const userInfoSchema = new mongoose.Schema({
-  addresses: [addressSchema],
-  creditcards: [creditSchema],
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    unique: true
   }
 });
 
@@ -116,7 +131,9 @@ userSchema.methods.comparePassword = function(potentialPassword) {
 
 
 const User = mongoose.model('User', userSchema);
-const UserInfo = mongoose.model('UserInfo', userInfoSchema);
+// const UserInfo = mongoose.model('UserInfo', userInfoSchema);
+const Credit = mongoose.model('Credit', creditSchema);
+const Address = mongoose.model('Address', multiAddressSchema);
 const History = mongoose.model('History', historySchema);
 
-module.exports = { User, UserInfo, History };
+module.exports = { User, Credit, Address, History };

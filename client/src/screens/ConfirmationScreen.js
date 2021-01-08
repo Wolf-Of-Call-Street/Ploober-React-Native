@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, FlatList, ScrollView, View, TouchableOpacity } from 'react-native';
-import { Card, Text, Button, ListItem, Divider } from 'react-native-elements';
+import { StyleSheet, FlatList, ScrollView, View, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { Card, Text, Button, ListItem, Divider} from 'react-native-elements';
 import Spacer from '../components/Spacer';
 import {
   Context as AppointmentContext
@@ -9,9 +9,11 @@ import { NavigationEvents } from 'react-navigation';
 import ConfirmModal from '../components/ConfirmModal';
 
 const ConfirmationScreen = ({ navigation }) => {
-  const { state: { appointmentReason, dateTime, addresses }, fetchAddresses, state } = useContext(AppointmentContext);
+  const { state: { appointmentReason, dateTime, addresses, cardInfo, currentAddress, currentPayment, localBusinesses }, fetchAddresses, fetchPaymentInfo, setCurrentAddress, setCurrentPayment, submitOrder, state } = useContext(AppointmentContext);
 
   const [showModal, setShowModal] = useState(false);
+  const [order, setOrder] = useState({});
+  const [toggle, setToggle] = useState(false);
 
   const day = new Date(dateTime).toLocaleDateString('en-US', {
     day: 'numeric',
@@ -23,11 +25,14 @@ const ConfirmationScreen = ({ navigation }) => {
     hour: 'numeric',
     minute: '2-digit',
   });
-
+  console.log(order);
   return (
     <>
       <NavigationEvents
-        onWillFocus={fetchAddresses}
+        onWillFocus={() => {
+          fetchAddresses();
+          fetchPaymentInfo();
+        }}
       />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -35,7 +40,8 @@ const ConfirmationScreen = ({ navigation }) => {
         nestedScrollEnabled
       >
         <Text h1 style={{ textAlign: 'center' }}>
-          Go With The Flow Plumbing
+          {/* Temporary Local Business Name */}
+          {localBusinesses[0].name}
       </Text>
         <Divider />
         <Card>
@@ -54,6 +60,39 @@ const ConfirmationScreen = ({ navigation }) => {
         <Divider />
         <Spacer>
           <Text h3 style={styles.center}>Payment Information</Text>
+          <Spacer>
+            <FlatList
+              data={cardInfo}
+              keyExtractor={(item, index) => item._id || String(index)}
+              renderItem={({ item }) => {
+                return (
+                  <TouchableOpacity
+                    activeOpacity={0.6}
+                    underlayColor="#DDDDDD"
+                    onPress ={() => setCurrentPayment(item)}
+                  >
+                    <ListItem
+                      key={item.item_id}
+                      bottomDivider>
+                      <ListItem.Content>
+                        <ListItem.Title>
+                          {item.type.charAt(0).toUpperCase() + item.type.slice(1)} ending in {item.number.slice(-4)}
+                        </ListItem.Title>
+                        <ListItem.Subtitle>
+                          Exp: {item.expiry.slice(0,2) + '/' + item.expiry.slice(2,4)}
+                        </ListItem.Subtitle>
+                      </ListItem.Content>
+                      <ListItem.CheckBox
+                        checked={toggle}
+                        onPress={ () => setToggle(!toggle) }
+                      />
+                    </ListItem>
+                  </TouchableOpacity>
+                )
+              }}
+            >
+            </FlatList>
+          </Spacer>
           <Button
             title="Add a New Card"
             onPress={() => navigation.navigate('Card')}
@@ -65,23 +104,30 @@ const ConfirmationScreen = ({ navigation }) => {
           <Spacer>
             <FlatList
               data={addresses}
-              keyExtractor={item => item._id}
+              keyExtractor={(item, index) => item._id || String(index)}
               renderItem={({ item }) => {
                 return (
-                  <TouchableOpacity>
+                  <TouchableHighlight
+                    onPress={() => {
+                      setCurrentAddress(item)
+                    }}
+                  >
                     <ListItem
                       key={item.item_id}
                       bottomDivider>
                       <ListItem.Content>
                         <ListItem.Title>
-                          {item.line1} {item.line}
+                          {item.line1}
                         </ListItem.Title>
                         <ListItem.Subtitle>
                           {item.city}, {item.state} {item.zipcode}
                         </ListItem.Subtitle>
                       </ListItem.Content>
+                      <ListItem.CheckBox
+                      checked={toggle}
+                      onPress={ () => setToggle(!toggle) }/>
                     </ListItem>
-                  </TouchableOpacity>
+                  </TouchableHighlight>
                 )
               }}
             >
@@ -96,13 +142,23 @@ const ConfirmationScreen = ({ navigation }) => {
         </Spacer>
         <Divider />
         <Spacer>
-        <ConfirmModal
-          showModal={showModal}
-          setShowModal={setShowModal}
-        />
+          <ConfirmModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
           <Button title="Confirm"
             onPress={
-              () => {setShowModal(true)}
+              () => {
+                setOrder({
+                  businessId: localBusinesses[0].id,
+                  businessName: localBusinesses[0].name,
+                  appointmentReason: 'appointmentReasonTest',
+                  dateTime: dateTime,
+                  address: currentAddress
+                })
+                submitOrder(order);
+                setShowModal(true);
+              }
             }
           />
         </Spacer>
