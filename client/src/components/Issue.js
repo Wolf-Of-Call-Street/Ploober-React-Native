@@ -3,8 +3,7 @@ import { View, Text } from 'react-native';
 import { Input } from 'react-native-elements';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
 
-const Issue = ({onSubmit}) => {
-  const [issue, setIssue] = useState('');
+const Issue = ({issue, setIssue}) => {
   const {state} = useContext(AppointmentContext);
 
   return (
@@ -15,7 +14,7 @@ const Issue = ({onSubmit}) => {
         value={issue}
         onChangeText={setIssue}
       />
-      {console.log(state.appointmentReason)}
+      {console.log(issue)}
     </View>
   )
 };

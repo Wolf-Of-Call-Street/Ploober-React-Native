@@ -10,15 +10,16 @@ import { Context as AppointmentContext } from '../context/AppointmentContext';
 const AppointmentScreen = ({navigation}) => {
 
   const [issue, setIssue] = useState('');
-  const { state } = useContext(AppointmentContext);
+  const [dateTime, setDateTime] = useState(0);
+  const { state, setAppointmentInfo } = useContext(AppointmentContext);
 
   return (
     <View>
       {/* {console.log(state.businessInfo)} */}
       <PlumberInfo />
-      <Issue />
+      <Issue issue={issue} setIssue={setIssue}/>
       <CalendarModule />
-      <Confirm navigation={navigation}/>
+      <Confirm navigation={navigation} setAppointmentInfo={setAppointmentInfo} issue={issue} dateTime={dateTime}/>
     </View>
   )
 };
