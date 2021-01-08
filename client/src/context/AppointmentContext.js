@@ -53,7 +53,7 @@ const getBusiness = (dispatch) => async (id, next) => {
   try {
     const response = await Yelp.get(`/${id}`);
     dispatch({ type: 'get_business', payload: response.data });
-    next()
+    next();
   } catch(err) {
     console.log(err);
   }

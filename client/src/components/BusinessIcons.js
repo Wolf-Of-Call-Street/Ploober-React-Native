@@ -16,13 +16,12 @@ const BusinessIcon = ({info}) => {
       starSize={20}
       fullStarColor='#FDCC0D'
       starStyle={{
-        paddingTop: 10
+        paddingTop: 5
       }}
     />
     </Text>
     <Text style={styles.reviews}>{info.reviews} Reviews</Text>
-    <Button style={styles.phone}title={info.phone} />
-
+    <Button style={styles.phone} title={info.phone} />
     </View>
   )
 };
@@ -38,16 +37,19 @@ const styles = StyleSheet.create({
   },
   ratings: {
     fontWeight: 'bold',
-    paddingTop: 12
+    paddingTop: 12,
   },
   reviews: {
+    position: 'absolute',
     fontWeight: 'bold',
-    bottom: 18
+    top: 30
   },
   phone: {
     bottom: 7,
     right: 20,
-    width: 200
+    width: 200,
+    top: 10,
+    height: 50
   }
 });
 

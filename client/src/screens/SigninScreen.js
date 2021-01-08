@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
+import { Button, Text } from 'react-native-elements';
 import { NavigationEvents } from 'react-navigation';
 import { Context as AuthContext } from '../context/AuthContext';
 import AccountForm from '../components/AccountForm';
@@ -11,6 +11,7 @@ const SigninScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <NavigationEvents onWillFocus={clearErrorMessage} />
+      <Text h2 style={styles.header}>Sign In to Ploober</Text>
       <AccountForm
         screenName="Sign In to Ploober"
         onSubmit={signin}
@@ -35,6 +36,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     marginBottom: 200
+  },
+  header: {
+    marginBottom: 30
   }
 });
 
