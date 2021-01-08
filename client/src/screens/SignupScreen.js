@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
+import { Button, Text } from 'react-native-elements';
 import { NavigationEvents } from 'react-navigation';
 import { Context as AuthContext } from '../context/AuthContext';
 import Spacer from '../components/Spacer';
@@ -11,15 +11,10 @@ import AccountForm from '../components/AccountForm';
 const SignupScreen = ({ navigation }) => {
   const { state, signup, clearErrorMessage, tryLocalSignIn } = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   tryLocalSignIn(() => {
-  //     navigation.navigate('Map');
-  //   });
-  // }, []);
-
   return (
     <View style={styles.container}>
       <NavigationEvents onWillFocus={clearErrorMessage} />
+      <Text h2 style={styles.header}>Sign Up for Ploober</Text>
       <AccountForm
         screenName="Sign Up for Ploober"
         errorName={state.errorMessage}
@@ -50,6 +45,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     marginBottom: 150
+  },
+  header: {
+    marginBottom: 30
   }
 });
 
