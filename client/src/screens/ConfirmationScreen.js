@@ -9,9 +9,10 @@ import { NavigationEvents } from 'react-navigation';
 import ConfirmModal from '../components/ConfirmModal';
 
 const ConfirmationScreen = ({ navigation }) => {
-  const { state: { appointmentReason, dateTime, addresses, cardInfo, currentAddress, currentPayment }, fetchAddresses, fetchPaymentInfo, setCurrentAddress, setCurrentPayment, state } = useContext(AppointmentContext);
+  const { state: { appointmentReason, dateTime, addresses, cardInfo, currentAddress, currentPayment, localBusinesses }, fetchAddresses, fetchPaymentInfo, setCurrentAddress, setCurrentPayment, submitOrder, state } = useContext(AppointmentContext);
 
   const [showModal, setShowModal] = useState(false);
+  const [order, setOrder] = useState({});
 
   const day = new Date(dateTime).toLocaleDateString('en-US', {
     day: 'numeric',
@@ -23,7 +24,7 @@ const ConfirmationScreen = ({ navigation }) => {
     hour: 'numeric',
     minute: '2-digit',
   });
-  console.log(state);
+  console.log(order);
   return (
     <>
       <NavigationEvents
@@ -38,7 +39,8 @@ const ConfirmationScreen = ({ navigation }) => {
         nestedScrollEnabled
       >
         <Text h1 style={{ textAlign: 'center' }}>
-          Go With The Flow Plumbing
+          {/* Temporary Local Business Name */}
+          {localBusinesses[0].name}
       </Text>
         <Divider />
         <Card>
@@ -136,7 +138,17 @@ const ConfirmationScreen = ({ navigation }) => {
           />
           <Button title="Confirm"
             onPress={
-              () => { setShowModal(true) }
+              () => {
+                setOrder({
+                  businessId: localBusinesses[0].id,
+                  businessName: localBusinesses[0].name,
+                  appointmentReason: 'appointmentReasonTest',
+                  dateTime: dateTime,
+                  address: currentAddress
+                })
+                submitOrder(order);
+                setShowModal(true);
+              }
             }
           />
         </Spacer>
