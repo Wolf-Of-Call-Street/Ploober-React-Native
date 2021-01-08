@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button, Text } from 'react-native-elements';
-import { NavigationEvents } from 'react-navigation';
+import { NavigationEvents, SafeAreaView } from 'react-navigation';
 import { Context as AuthContext } from '../context/AuthContext';
 import AccountForm from '../components/AccountForm';
 
@@ -9,7 +9,7 @@ const SigninScreen = ({ navigation }) => {
   const { state, signin, clearErrorMessage } = useContext(AuthContext);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
       <NavigationEvents onWillFocus={clearErrorMessage} />
       <Text h2 style={styles.header}>Sign In to Ploober</Text>
       <AccountForm
@@ -21,7 +21,7 @@ const SigninScreen = ({ navigation }) => {
         }}
       />
       <Button style={{ marginTop: 20 }} onPress={() => navigation.navigate('Signup')} title="Don't have an account? Move to Sign Up" />
-    </View>
+    </SafeAreaView>
   )
 };
 
