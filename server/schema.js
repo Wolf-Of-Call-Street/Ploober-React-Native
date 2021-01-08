@@ -6,8 +6,16 @@ const addressSchema = new mongoose.Schema({
   line2: String,
   zipcode: String,
   state: String,
-  city: String
+  city: String,
 });
+
+const multiAddressSchema = new mongoose.Schema({
+  addresses: [addressSchema],
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+})
 
 const creditSchema = new mongoose.Schema({
   number: {
@@ -119,7 +127,7 @@ userSchema.methods.comparePassword = function(potentialPassword) {
 const User = mongoose.model('User', userSchema);
 // const UserInfo = mongoose.model('UserInfo', userInfoSchema);
 const Credit = mongoose.model('Credit', creditSchema);
-const Address = mongoose.model('Address', addressSchema);
+const Address = mongoose.model('Address', multiAddressSchema);
 const History = mongoose.model('History', historySchema);
 
 module.exports = { User, Credit, Address, History };

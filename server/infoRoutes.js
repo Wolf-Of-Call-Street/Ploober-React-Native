@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const UserInfo = require('./schema.js').UserInfo;
+// const UserInfo = require('./schema.js').UserInfo;
+const Address = require('./schema.js').Address;
+const Credit = require('./schema.js').Credit;
 const History = require('./schema.js').History;
 const mongoose = require('mongoose');
 const config = require('./config.json');
@@ -7,10 +9,10 @@ const requireAuth = require('./requireAuth.js');
 
 router.use(requireAuth);
 
-router.post('/creditCard', (req, res) => {
-  const { creditcards, addresses } = req.body;
+router.post('/credit', (req, res) => {
+  const { creditcards } = req.body;
   const userId = req.user._id;
-  UserInfo.update({userId}, { creditcards, addresses, userId}, {upsert: true})
+  Credit.update({userId}, { creditcards, userId }, {upsert: true})
     .then(() => {
       res.status(200).send('Credit card upserted!');
     })
@@ -19,10 +21,10 @@ router.post('/creditCard', (req, res) => {
     })
 });
 
-router.get('/creditCard/:id', (req, res) => {
-  UserInfo.find({ _id: req.params.id})
+router.get('/credit', (req, res) => {
+  Credit.find({ userId: req.params.id})
     .then((results) => {
-      res.status(200).json(results.data);
+      res.status(200).send(results.data);
     })
     .catch((err) => {
       res.status(400).send(err);
@@ -32,17 +34,17 @@ router.get('/creditCard/:id', (req, res) => {
 router.post('/address', (req, res) => {
   const { addresses } = req.body
   const userId = req.user._id;
-  UserInfo.update({userId}, { addresses, userId }, { upsert: true })
+  Address.update({userId}, { addresses, userId }, { upsert: true })
     .then(() => {
       res.status(200).send('Upserted Address Info');
     })
     .catch((err) => {
-      res.status(400).send(err);
+      res.status(400).send(err.message);
     })
 });
 
 router.get('/address', (req, res) => {
-  UserInfo.find({userId: req.user._id})
+  Address.find({userId: req.user._id})
     .then((results) => {
       res.status(200).send(results[0].addresses);
     })
