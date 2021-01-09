@@ -49,11 +49,10 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     borderColor: '#CBDBFC',
-    borderWidth: 2
+    borderWidth: 5
   },
   map: {
     height: 200,
-    marginBottom: 10
   },
   title: {
     fontSize: 24,
