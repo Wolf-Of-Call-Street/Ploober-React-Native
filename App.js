@@ -23,7 +23,7 @@ const mainFlow = createStackNavigator({
   Card: CardDetailScreen,
   Address: AddressDetailScreen,
 });
-const Account = AccountScreen;
+const Account = createStackNavigator({Account: AccountScreen});
 
 mainFlow.navigationOptions = {
   title: 'Businesses',
