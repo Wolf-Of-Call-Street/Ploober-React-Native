@@ -12,7 +12,6 @@ const ConfirmationScreen = ({ navigation }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [order, setOrder] = useState({});
-  const [toggle, setToggle] = useState(false);
 
   const day = new Date(dateTime).toLocaleDateString('en-US', {
     day: 'numeric',
@@ -38,8 +37,8 @@ const ConfirmationScreen = ({ navigation }) => {
     <>
       <NavigationEvents
         onWillFocus={() => {
-          fetchAddresses();
           fetchPaymentInfo();
+          fetchAddresses();
         }}
       />
       <ScrollView
@@ -90,10 +89,6 @@ const ConfirmationScreen = ({ navigation }) => {
                           Exp: {item.expiry.slice(0,2) + '/' + item.expiry.slice(2,4)}
                         </ListItem.Subtitle>
                       </ListItem.Content>
-                      <ListItem.CheckBox
-                        checked={toggle}
-                        onPress={ () => setToggle(!toggle) }
-                      />
                     </ListItem>
                   </TouchableOpacity>
                 )
@@ -150,6 +145,7 @@ const ConfirmationScreen = ({ navigation }) => {
           <ConfirmModal
             showModal={showModal}
             setShowModal={setShowModal}
+            navigation={navigation}
           />
           <Button title="Confirm"
             onPress={

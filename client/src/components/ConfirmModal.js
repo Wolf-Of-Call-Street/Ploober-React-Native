@@ -4,7 +4,7 @@ import { Text, Button, Card } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import { AntDesign } from '@expo/vector-icons';
 
-const ConfirmModal = ({showModal, setShowModal}) => {
+const ConfirmModal = ({showModal, setShowModal, navigation}) => {
   const toggleModal = () => {
     setShowModal(!showModal);
   }
@@ -29,7 +29,10 @@ const ConfirmModal = ({showModal, setShowModal}) => {
         />
         <Button
           title="Continue"
-          onPress={toggleModal}
+          onPress={() =>{
+            toggleModal();
+            navigation.navigate('Map');
+          }}
           style={{paddingTop: 25}}
         />
         </Card>

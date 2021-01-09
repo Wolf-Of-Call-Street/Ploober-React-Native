@@ -13,7 +13,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { CreditCardInput } from 'react-native-vertical-credit-card-input';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
 
-const CardDetailScreen = () => {
+const CardDetailScreen = ({ navigation }) => {
   const [ cardDetailData, setCardDetailData ] = useState({});
   const { state: { creditcards }, setCardInfo, sendCardInfo } = useContext(AppointmentContext);
 
@@ -35,11 +35,8 @@ const CardDetailScreen = () => {
   useEffect(() => {
     if (creditcards.length) {
       sendCardInfo(creditcards);
-      console.log('sent');
     }
   }, [creditcards]);
-
-  console.log(JSON.stringify(creditcards, null, " "));
 
   return (
     <KeyboardAwareScrollView
@@ -75,6 +72,7 @@ const CardDetailScreen = () => {
             setAddressInfo={setCardDetailData}
             info={cardDetailData}
             overwritePrivileges={false}
+            navigation={navigation}
           />
         </ScrollView>
       </TouchableWithoutFeedback>

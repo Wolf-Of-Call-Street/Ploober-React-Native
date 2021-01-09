@@ -137,7 +137,6 @@ userSchema.methods.comparePassword = function(potentialPassword) {
 
 
 const User = mongoose.model('User', userSchema);
-// const UserInfo = mongoose.model('UserInfo', userInfoSchema);
 const Credit = mongoose.model('Credit', multiCreditSchema);
 const Address = mongoose.model('Address', multiAddressSchema);
 const History = mongoose.model('History', historySchema);
