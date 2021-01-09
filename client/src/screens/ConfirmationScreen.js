@@ -11,7 +11,7 @@ import {
   View,
   TouchableHighlight,
   TouchableOpacity,
-  LogBox
+  LogBox,
 } from 'react-native';
 
 import {
@@ -27,8 +27,10 @@ import {
 } from '../context/AppointmentContext';
 
 import { NavigationEvents } from 'react-navigation';
+import { LinearGradient } from 'expo-linear-gradient';
 import Spacer from '../components/Spacer';
 import ConfirmModal from '../components/ConfirmModal';
+import { MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons';
 
 const ConfirmationScreen = ({ navigation }) => {
   LogBox.ignoreLogs(['VirtualizedLists should never be nested',
@@ -61,7 +63,6 @@ const ConfirmationScreen = ({ navigation }) => {
     .toLocaleDateString('en-US', {
       day: 'numeric',
       month: 'long',
-      year: 'numeric',
     });
 
   const time = new Date(dateTime)
@@ -86,7 +87,12 @@ const ConfirmationScreen = ({ navigation }) => {
   }, [currentAddress]);
 
   return (
-    <>
+    <LinearGradient
+      colors={['#2FA3F1', '#CBDBFC', 'white']}
+      start={{ x: 0, y: 0.5 }}
+      end={{ x: 0, y: 1.0 }}
+      locations={[0.0, 0.5, 1]}
+    >
       <NavigationEvents
         onWillFocus={() => {
           fetchPaymentInfo();
@@ -98,18 +104,32 @@ const ConfirmationScreen = ({ navigation }) => {
         showsHorizontalScrollIndicator={false}
         nestedScrollEnabled
       >
-        <Text h1 style={{ textAlign: 'center' }}>
-          {businessInfo.name}
+        <Text style={styles.checkout}>
+          Checkout
       </Text>
-        <Divider />
-        <Card>
-          <Card.Title style={{ fontSize: 16 }}>Your Issue</Card.Title>
+        <Card
+          containerStyle={styles.cardContainer}
+        >
+          <View style={styles.cardTitleContiner}>
+            <Card.FeaturedTitle style={styles.cardTitle}>{businessInfo.name}</Card.FeaturedTitle>
+            <MaterialCommunityIcons name="table-clock" size={24} color="white" />
+          </View>
           <Card.Divider />
+          <View style={styles.cardContentContainer}>
+            <View style={styles.cardContentRow}>
+              <AntDesign name="calendar" size={24} color="white" />
+              <Text style={styles.cardText}>{day}</Text>
+            </View>
+            <View style={styles.cardContentRow}>
+              <Ionicons name="md-time-outline" size={24} color="white" />
+              <Text style={styles.cardText}>{time}</Text>
+            </View>
+          </View>
           <Text>
             {appointmentReason}
-        </Text>
+          </Text>
         </Card>
-        <Spacer>
+        {/* <Spacer>
           <Text h3 style={styles.center}> Appointment Date</Text>
         </Spacer>
         <Spacer>
@@ -118,9 +138,9 @@ const ConfirmationScreen = ({ navigation }) => {
             <Text style={styles.center}>{day} at {time}</Text>
           }
         </Spacer>
-        <Divider />
+        <Divider /> */}
         <Spacer>
-          <Text h3 style={styles.center}>Payment Information</Text>
+          <Text style={styles.center}>Payment Information</Text>
           <Spacer>
             <FlatList
               data={creditcards}
@@ -128,13 +148,14 @@ const ConfirmationScreen = ({ navigation }) => {
               renderItem={({ item }) => {
                 return (
                   <TouchableOpacity
-                    onPress ={() => setCurrentPayment(item)}
+                    onPress={() => setCurrentPayment(item)}
                   >
                     <ListItem
                       key={item.item_id}
                       containerStyle={
-                        { backgroundColor:
-                          item._id === currentPayment._id ? '#CBDBFC' : '#FFFFFF'
+                        {
+                          backgroundColor:
+                            item._id === currentPayment._id ? '#CBDBFC' : '#FFFFFF'
                         }}
                       bottomDivider>
                       <ListItem.Content>
@@ -157,9 +178,8 @@ const ConfirmationScreen = ({ navigation }) => {
             onPress={() => navigation.navigate('Card')}
           />
         </Spacer>
-        <Divider />
         <Spacer>
-          <Text h3 style={styles.center}>Addresses</Text>
+          <Text style={styles.center}>Locations</Text>
           <Spacer>
             <FlatList
               data={addresses}
@@ -167,16 +187,18 @@ const ConfirmationScreen = ({ navigation }) => {
               renderItem={({ item }) => {
                 return (
                   <TouchableOpacity
-                  pressDuration={0.005}
-                  onPress={async () => {
-                    await setCurrentAddress(item);
-                  }}
+                    pressDuration={0.005}
+                    activeOpacity={.5}
+                    onPress={async () => {
+                      await setCurrentAddress(item);
+                    }}
                   >
                     <ListItem
                       key={item.item_id}
                       containerStyle={
-                        { backgroundColor:
-                          item._id === currentAddress._id ? '#CBDBFC' : '#FFFFFF'
+                        {
+                          backgroundColor:
+                            item._id === currentAddress._id ? '#CBDBFC' : '#FFFFFF'
                         }}
                       bottomDivider>
                       <ListItem.Content>
@@ -201,7 +223,6 @@ const ConfirmationScreen = ({ navigation }) => {
             }}
           />
         </Spacer>
-        <Divider />
         <Spacer>
           <ConfirmModal
             showModal={showModal}
@@ -229,13 +250,56 @@ const ConfirmationScreen = ({ navigation }) => {
           />
         </Spacer>
       </ScrollView>
-    </>
+    </LinearGradient>
   )
 };
 
 const styles = StyleSheet.create({
+  cardContainer: {
+    backgroundColor: '#374DD5',
+    borderWidth: 0,
+    borderRadius: 7.5,
+  },
+  cardTitleContiner: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  cardContentContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  cardContentRow: {
+    flexDirection: 'row',
+    flex: 1,
+    paddingTop: 12,
+    paddingLeft: 20,
+  },
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    // alignSelf: 'flex-start',
+    color: '#FFF'
+  },
+  cardText: {
+    color: 'white',
+    paddingLeft: 10,
+    paddingTop: 3,
+    fontSize: 15,
+  },
+  checkout: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 36,
+    paddingLeft: 10,
+    paddingTop: 10,
+  },
   center: {
     textAlign: 'center',
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 24,
   },
 });
 
