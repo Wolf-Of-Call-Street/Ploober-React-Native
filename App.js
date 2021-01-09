@@ -13,9 +13,28 @@ import SplashScreen from './client/src/screens/SplashScreen';
 import { Provider as AppointmentProvider } from './client/src/context/AppointmentContext';
 import { Provider as AuthProvider } from './client/src/context/AuthContext';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import {Feather, MaterialIcons} from '@expo/vector-icons';
 
 
+const mainFlow = createStackNavigator({
+  Map: MapScreen,
+  Appointment: AppointmentScreen,
+  Confirmation: ConfirmationScreen,
+  Card: CardDetailScreen,
+  Address: AddressDetailScreen,
+});
+const Account = createBottomTabNavigator({
+  Account: AccountScreen,
+});
+mainFlow.navigationOptions = {
+  title: 'Businesses',
+  tabBarIcon: <Feather name="map" size={20} color="#374DD5" />
+};
+
+Account.navigationOptions = {
+  title: 'History',
+  tabBarIcon: <MaterialIcons name="account-circle" size={30} color="#374DD5"/>
+}
 
 const switchNavigator = createSwitchNavigator({
   Splash: SplashScreen,
@@ -24,17 +43,10 @@ const switchNavigator = createSwitchNavigator({
     Signin: SigninScreen
   }),
   mainTabs: createBottomTabNavigator({
-    mainFlow: createStackNavigator({
-      Map: MapScreen,
-      Appointment: AppointmentScreen,
-      Confirmation: ConfirmationScreen,
-      Card: CardDetailScreen,
-      Address: AddressDetailScreen,
-    }),
-    Account: AccountScreen
+    mainFlow,
+    Account
   })
 });
-
 
 const App =  createAppContainer(switchNavigator);
 
