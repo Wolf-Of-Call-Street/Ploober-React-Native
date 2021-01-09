@@ -26,7 +26,7 @@ const AppointmentReducer = (state, action) => {
       };
     case 'fetch_payment_info':
       return {
-        ...state, cardInfo: action.payload
+        ...state, creditcards: action.payload
       };
     case 'set_current_address':
       return {

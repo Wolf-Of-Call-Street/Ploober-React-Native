@@ -19,7 +19,7 @@ const AddressValidationSchema = Yup.object({
     .min(2, 'The state you entered is too short'),
 })
 
-const AddressForm = ({ headerText, setAddressInfo, sendAddressInfo, info, overwritePrivileges, navigation }) => {
+const AddressForm = ({ headerText, setAddressInfo, sendAddressInfo, info, overwritePrivileges, navigation, setCardInfo, creditcards}) => {
   return (
     <>
       <Spacer>
@@ -41,6 +41,7 @@ const AddressForm = ({ headerText, setAddressInfo, sendAddressInfo, info, overwr
             await setAddressInfo(values);
           } else {
             await setAddressInfo({...info, billingAddress: values})
+            await setCardInfo(info);
           }
 
           navigation.navigate('Confirmation');

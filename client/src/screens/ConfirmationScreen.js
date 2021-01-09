@@ -10,7 +10,7 @@ import ConfirmModal from '../components/ConfirmModal';
 const ConfirmationScreen = ({ navigation }) => {
   LogBox.ignoreLogs(['VirtualizedLists should never be nested',
   'componentWillReceiveProps has been renamed']);
-  const { state: { appointmentReason, dateTime, addresses, cardInfo, currentAddress, currentPayment, localBusinesses, businessInfo }, fetchAddresses, fetchPaymentInfo, setCurrentAddress, setCurrentPayment, submitOrder, state } = useContext(AppointmentContext);
+  const { state: { appointmentReason, dateTime, addresses, cardInfo, currentAddress, currentPayment, localBusinesses, businessInfo, creditcards }, fetchAddresses, fetchPaymentInfo, setCurrentAddress, setCurrentPayment, submitOrder, state } = useContext(AppointmentContext);
 
   const [showModal, setShowModal] = useState(false);
   const [order, setOrder] = useState({});
@@ -78,7 +78,7 @@ const ConfirmationScreen = ({ navigation }) => {
           <Text h3 style={styles.center}>Payment Information</Text>
           <Spacer>
             <FlatList
-              data={cardInfo}
+              data={creditcards}
               keyExtractor={(item, index) => item._id || String(index)}
               renderItem={({ item }) => {
                 return (
@@ -136,7 +136,7 @@ const ConfirmationScreen = ({ navigation }) => {
                       bottomDivider>
                       <ListItem.Content>
                         <ListItem.Title>
-                          {item.line1}
+                          {item.line1} {item.line2}
                         </ListItem.Title>
                         <ListItem.Subtitle>
                           {item.city}, {item.state} {item.zipcode}

@@ -27,17 +27,8 @@ const CardDetailScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    if (cardDetailData.hasOwnProperty('billingAddress')) {
-      setCardInfo(cardDetailData);
-    }
-  }, [cardDetailData]);
-
-  useEffect(() => {
-    if (creditcards.length) {
       sendCardInfo(creditcards);
-    }
-  }, [creditcards]);
-
+  }, [creditcards.length]);
   return (
     <KeyboardAwareScrollView
       enableOnAndroid
@@ -73,6 +64,8 @@ const CardDetailScreen = ({ navigation }) => {
             info={cardDetailData}
             overwritePrivileges={false}
             navigation={navigation}
+            setCardInfo={setCardInfo}
+            creditcards={creditcards}
           />
         </ScrollView>
       </TouchableWithoutFeedback>
