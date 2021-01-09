@@ -23,9 +23,8 @@ const mainFlow = createStackNavigator({
   Card: CardDetailScreen,
   Address: AddressDetailScreen,
 });
-const Account = createBottomTabNavigator({
-  Account: AccountScreen,
-});
+const Account = AccountScreen;
+
 mainFlow.navigationOptions = {
   title: 'Businesses',
   tabBarIcon: <Feather name="map" size={35} color="#374DD5" />
