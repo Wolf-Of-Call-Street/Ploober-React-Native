@@ -41,13 +41,13 @@ const CalendarModule = ({dateTime, setDateTime, styles}) => {
       <Text style={styles.genericText}>{date.toLocaleDateString()} at {date.toLocaleTimeString()}</Text>
       <View>
         <Button
-        style={styles.caldendarButton}
+        style={styles.calendarButton}
         onPress={showDatepicker}
         title="Choose Date" />
       </View>
       <View>
         <Button
-        style={styles.caldendarButton}
+        style={styles.calendarButton}
         onPress={showTimepicker}
         title="Choose Time" />
       </View>
