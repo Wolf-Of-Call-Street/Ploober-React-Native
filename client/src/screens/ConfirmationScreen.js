@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect} from 'react';
-import { StyleSheet, FlatList, ScrollView, View, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { StyleSheet, FlatList, ScrollView, View, TouchableHighlight, TouchableOpacity, LogBox } from 'react-native';
 import { Card, Text, Button, ListItem, Divider} from 'react-native-elements';
 import Spacer from '../components/Spacer';
 import {
@@ -8,6 +8,8 @@ import {
 import { NavigationEvents } from 'react-navigation';
 import ConfirmModal from '../components/ConfirmModal';
 const ConfirmationScreen = ({ navigation }) => {
+  LogBox.ignoreLogs(['VirtualizedLists should never be nested',
+  'componentWillReceiveProps has been renamed']);
   const { state: { appointmentReason, dateTime, addresses, cardInfo, currentAddress, currentPayment, localBusinesses, businessInfo }, fetchAddresses, fetchPaymentInfo, setCurrentAddress, setCurrentPayment, submitOrder, state } = useContext(AppointmentContext);
 
   const [showModal, setShowModal] = useState(false);
