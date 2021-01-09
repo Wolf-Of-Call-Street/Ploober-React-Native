@@ -47,7 +47,7 @@ const AccountScreen = ({ navigation }) => {
         <FlatList
           style={styles.historyList}
           data={state.history}
-          keyExtractor={(item) => item._id}
+          keyExtractor={(item, index) => item._id || index.toString()}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect} from 'react';
 import { StyleSheet, FlatList, ScrollView, View, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { Card, Text, Button, ListItem, Divider} from 'react-native-elements';
 import Spacer from '../components/Spacer';
@@ -24,6 +24,17 @@ const ConfirmationScreen = ({ navigation }) => {
     hour: 'numeric',
     minute: '2-digit',
   });
+
+  useEffect(() => {
+    setOrder({
+      businessId: businessInfo.id,
+      businessName: businessInfo.name,
+      appointmentReason: appointmentReason,
+      dateTime: dateTime,
+      address: currentAddress
+    })
+  }, [currentAddress]);
+  console.log( typeof dateTime);
   return (
     <>
       <NavigationEvents
@@ -38,7 +49,6 @@ const ConfirmationScreen = ({ navigation }) => {
         nestedScrollEnabled
       >
         <Text h1 style={{ textAlign: 'center' }}>
-          {/* Temporary Local Business Name */}
           {businessInfo.name}
       </Text>
         <Divider />
@@ -46,7 +56,7 @@ const ConfirmationScreen = ({ navigation }) => {
           <Card.Title style={{ fontSize: 16 }}>Your Issue</Card.Title>
           <Card.Divider />
           <Text>
-            Skate ipsum dolor sit amet, crail grab Slimeballs tailslide camel back gap bigspin full-cab hip. Coffin fastplant Tracker tuna-flip late fakie out concave. Trucks bone air no comply hang-up masonite air layback. Rail slide shinner gap frigid air stalefish kick-nose slide. Rails street boneless sketchy bigspin salad grind indy grab. Deck fastplant half-flip carve 1080 late layback Gator Mark Anthony. Varial ollie ollie hole chicken wing baseplate freestyle hang ten.
+            {appointmentReason}
         </Text>
         </Card>
         <Spacer>
@@ -106,8 +116,8 @@ const ConfirmationScreen = ({ navigation }) => {
               renderItem={({ item }) => {
                 return (
                   <TouchableHighlight
-                    onPress={() => {
-                      setCurrentAddress(item)
+                    onPress={async () => {
+                      await setCurrentAddress(item);
                     }}
                   >
                     <ListItem
@@ -121,9 +131,9 @@ const ConfirmationScreen = ({ navigation }) => {
                           {item.city}, {item.state} {item.zipcode}
                         </ListItem.Subtitle>
                       </ListItem.Content>
-                      <ListItem.CheckBox
+                      {/* <ListItem.CheckBox
                       checked={toggle}
-                      onPress={ () => setToggle(!toggle) }/>
+                      onPress={ () => setToggle(!toggle) }/> */}
                     </ListItem>
                   </TouchableHighlight>
                 )
@@ -147,13 +157,6 @@ const ConfirmationScreen = ({ navigation }) => {
           <Button title="Confirm"
             onPress={
               () => {
-                setOrder({
-                  businessId: businessInfo.id,
-                  businessName: businessInfo.name,
-                  appointmentReason: 'appointmentReasonTest',
-                  dateTime: dateTime,
-                  address: currentAddress
-                })
                 submitOrder(order);
                 setShowModal(true);
               }
