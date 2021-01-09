@@ -82,13 +82,17 @@ const ConfirmationScreen = ({ navigation }) => {
                   >
                     <ListItem
                       key={item.item_id}
+                      containerStyle={
+                        { backgroundColor:
+                          item._id === currentPayment._id ? '#CBDBFC' : null
+                        }}
                       bottomDivider>
                       <ListItem.Content>
                         <ListItem.Title>
                           {item.type.charAt(0).toUpperCase() + item.type.slice(1)} ending in {item.number.slice(-4)}
                         </ListItem.Title>
                         <ListItem.Subtitle>
-                          Exp: {item.expiry.slice(0,2) + '/' + item.expiry.slice(2,4)}
+                          Exp: {item.expiry}
                         </ListItem.Subtitle>
                       </ListItem.Content>
                     </ListItem>
@@ -112,13 +116,18 @@ const ConfirmationScreen = ({ navigation }) => {
               keyExtractor={(item, index) => item._id || String(index)}
               renderItem={({ item }) => {
                 return (
-                  <TouchableHighlight
-                    onPress={async () => {
-                      await setCurrentAddress(item);
-                    }}
+                  <TouchableOpacity
+                  pressDuration={0.005}
+                  onPress={async () => {
+                    await setCurrentAddress(item);
+                  }}
                   >
                     <ListItem
                       key={item.item_id}
+                      containerStyle={
+                        { backgroundColor:
+                          item._id === currentAddress._id ? '#CBDBFC' : '#FFFFFF'
+                        }}
                       bottomDivider>
                       <ListItem.Content>
                         <ListItem.Title>
@@ -129,7 +138,7 @@ const ConfirmationScreen = ({ navigation }) => {
                         </ListItem.Subtitle>
                       </ListItem.Content>
                     </ListItem>
-                  </TouchableHighlight>
+                  </TouchableOpacity>
                 )
               }}
             >
