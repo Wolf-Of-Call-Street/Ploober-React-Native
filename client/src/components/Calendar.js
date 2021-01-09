@@ -40,10 +40,16 @@ const CalendarModule = ({dateTime, setDateTime, styles}) => {
     <View>
       <Text style={styles.genericText}>{date.toLocaleDateString()} at {date.toLocaleTimeString()}</Text>
       <View>
-        <Button name="Calendar Button" onPress={showDatepicker} title="Choose Date" />
+        <Button
+        style={styles.calendarButton}
+        onPress={showDatepicker}
+        title="Choose Date" />
       </View>
       <View>
-        <Button name="Calendar Button" onPress={showTimepicker} title="Choose Time" />
+        <Button
+        style={styles.calendarButton}
+        onPress={showTimepicker}
+        title="Choose Time" />
       </View>
       {show && (
         <DateTimePicker
