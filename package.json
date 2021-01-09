@@ -50,7 +50,8 @@
     "react-navigation-stack": "^2.10.2",
     "react-navigation-tabs": "^2.10.1",
     "react-refresh": "^0.8.3",
-    "yup": "^0.32.8"
+    "yup": "^0.32.8",
+    "expo-linear-gradient": "~8.4.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
