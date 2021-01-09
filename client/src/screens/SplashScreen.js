@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
+import { Text, Button } from 'react-native-elements';
 import { SafeAreaView } from 'react-navigation';
 import { Context as AuthContext } from '../context/AuthContext';
 
@@ -20,7 +20,8 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }} style={styles.container}>
-      <Text>SPLAAAASH</Text>
+      <Text h1>Ploober</Text>
+      <View />
       {ready ? <Button onPress={() => navigation.navigate('loginFlow')} title="Proceed to Login"/> : <Text>Loading...</Text>}
     </SafeAreaView>
   )
@@ -28,7 +29,8 @@ const SplashScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30
+    marginTop: 30,
+    justifyContent: "center"
   }
 });
 

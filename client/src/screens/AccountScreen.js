@@ -51,7 +51,7 @@ const AccountScreen = ({ navigation }) => {
           renderItem={({ item }) => {
             return (
               <TouchableOpacity>
-                <ListItem style={styles.historyItem}>
+                <ListItem style={styles.historyItem} bottomDivider >
                   <View style={{flexDirection: "column", flex: 1}}>
                     <ListItem.Title>{item.businessName}</ListItem.Title>
                     <Text>{timeConverter(item.dateTime)}</Text>

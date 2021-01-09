@@ -62,9 +62,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     paddingBottom: 5,
-    borderWidth: 3,
-    borderColor: 'silver',
-    borderRadius: 10
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 10,
+    backgroundColor: '#CBDBFC',
   }
 });
 
