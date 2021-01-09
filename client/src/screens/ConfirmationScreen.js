@@ -77,8 +77,6 @@ const ConfirmationScreen = ({ navigation }) => {
               renderItem={({ item }) => {
                 return (
                   <TouchableOpacity
-                    activeOpacity={0.6}
-                    underlayColor="#DDDDDD"
                     onPress ={() => setCurrentPayment(item)}
                   >
                     <ListItem
@@ -133,9 +131,6 @@ const ConfirmationScreen = ({ navigation }) => {
                           {item.city}, {item.state} {item.zipcode}
                         </ListItem.Subtitle>
                       </ListItem.Content>
-                      {/* <ListItem.CheckBox
-                      checked={toggle}
-                      onPress={ () => setToggle(!toggle) }/> */}
                     </ListItem>
                   </TouchableHighlight>
                 )

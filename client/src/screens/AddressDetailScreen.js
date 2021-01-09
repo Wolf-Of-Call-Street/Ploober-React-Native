@@ -35,6 +35,7 @@ const AddressDetailScreen = () => {
             setAddressInfo={setAddressInfo}
             sendAddressInfo={sendAddressInfo}
             addresses={addresses}
+            overwritePrivileges
           />
         </ScrollView>
       </TouchableWithoutFeedback>

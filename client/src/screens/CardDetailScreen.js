@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   View,
   StyleSheet,
@@ -10,14 +10,37 @@ import { Text } from 'react-native-elements'
 import AddressForm from '../components/AddressForm';
 import Spacer from '../components/Spacer';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {
-  CreditCardInput
-} from 'react-native-vertical-credit-card-input';
-
-const _onChange = (formData) =>
-  console.log(formData);
+import { CreditCardInput } from 'react-native-vertical-credit-card-input';
+import { Context as AppointmentContext } from '../context/AppointmentContext';
 
 const CardDetailScreen = () => {
+  const [ cardDetailData, setCardDetailData ] = useState({});
+  const { state: { creditcards }, setCardInfo, sendCardInfo } = useContext(AppointmentContext);
+
+  const _onChange = (formData) => {
+    const { number, expiry, cvc, type, name} = formData.values;
+    if (formData.valid) {
+      setCardDetailData(
+        { ...cardDetailData, number, expiry, cvc, type, name}
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (cardDetailData.hasOwnProperty('billingAddress')) {
+      setCardInfo(cardDetailData);
+    }
+  }, [cardDetailData]);
+
+  useEffect(() => {
+    if (creditcards.length) {
+      sendCardInfo(creditcards);
+      console.log('sent');
+    }
+  }, [creditcards]);
+
+  console.log(JSON.stringify(creditcards, null, " "));
+
   return (
     <KeyboardAwareScrollView
       enableOnAndroid
@@ -49,8 +72,9 @@ const CardDetailScreen = () => {
           />
           <AddressForm
             headerText='Enter Billing Address'
-            additionalValidation
-            valid
+            setAddressInfo={setCardDetailData}
+            info={cardDetailData}
+            overwritePrivileges={false}
           />
         </ScrollView>
       </TouchableWithoutFeedback>
