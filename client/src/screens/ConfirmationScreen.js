@@ -7,9 +7,8 @@ import {
 } from '../context/AppointmentContext';
 import { NavigationEvents } from 'react-navigation';
 import ConfirmModal from '../components/ConfirmModal';
-
 const ConfirmationScreen = ({ navigation }) => {
-  const { state: { appointmentReason, dateTime, addresses, cardInfo, currentAddress, currentPayment, localBusinesses }, fetchAddresses, fetchPaymentInfo, setCurrentAddress, setCurrentPayment, submitOrder, state } = useContext(AppointmentContext);
+  const { state: { appointmentReason, dateTime, addresses, cardInfo, currentAddress, currentPayment, localBusinesses, businessInfo }, fetchAddresses, fetchPaymentInfo, setCurrentAddress, setCurrentPayment, submitOrder, state } = useContext(AppointmentContext);
 
   const [showModal, setShowModal] = useState(false);
   const [order, setOrder] = useState({});
@@ -25,7 +24,6 @@ const ConfirmationScreen = ({ navigation }) => {
     hour: 'numeric',
     minute: '2-digit',
   });
-  console.log(order);
   return (
     <>
       <NavigationEvents
@@ -41,7 +39,7 @@ const ConfirmationScreen = ({ navigation }) => {
       >
         <Text h1 style={{ textAlign: 'center' }}>
           {/* Temporary Local Business Name */}
-          {localBusinesses[0].name}
+          {businessInfo.name}
       </Text>
         <Divider />
         <Card>
@@ -150,8 +148,8 @@ const ConfirmationScreen = ({ navigation }) => {
             onPress={
               () => {
                 setOrder({
-                  businessId: localBusinesses[0].id,
-                  businessName: localBusinesses[0].name,
+                  businessId: businessInfo.id,
+                  businessName: businessInfo.name,
                   appointmentReason: 'appointmentReasonTest',
                   dateTime: dateTime,
                   address: currentAddress
