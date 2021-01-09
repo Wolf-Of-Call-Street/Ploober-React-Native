@@ -34,7 +34,6 @@ const ConfirmationScreen = ({ navigation }) => {
       address: currentAddress
     })
   }, [currentAddress]);
-  console.log( typeof dateTime);
   return (
     <>
       <NavigationEvents
@@ -63,7 +62,10 @@ const ConfirmationScreen = ({ navigation }) => {
           <Text h3 style={styles.center}> Appointment Date</Text>
         </Spacer>
         <Spacer>
-          <Text style={styles.center}>{day} at {time}</Text>
+          { dateTime === 0 ?
+            <Text style={styles.center}> Select a Valid Appointment Slot</Text> :
+            <Text style={styles.center}>{day} at {time}</Text>
+          }
         </Spacer>
         <Divider />
         <Spacer>
