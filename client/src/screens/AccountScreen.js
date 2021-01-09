@@ -74,18 +74,22 @@ const AccountScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    paddingHorizontal: 10
   },
   section: {
     flex: 1,
     marginTop: 20,
-    marginBottom: 10
+    marginBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "black"
   },
   historyList: {
     flex: 1
   },
   historyItem: {
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    backgroundColor: "#CBDBFC"
   }
 });
 
