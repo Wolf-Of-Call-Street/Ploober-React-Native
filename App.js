@@ -27,7 +27,7 @@ const Account = createBottomTabNavigator({
   Account: AccountScreen,
 });
 mainFlow.navigationOptions = {
-  title: 'Businesses Near You',
+  title: 'Businesses',
   tabBarIcon: <Feather name="map" size={20} color="#374DD5" />
 };
 
