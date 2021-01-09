@@ -26,6 +26,11 @@ const ConfirmationScreen = ({ navigation }) => {
     minute: '2-digit',
   });
 
+  const resetOrder = () => {
+    setCurrentPayment('');
+    setCurrentAddress('');
+  }
+
   useEffect(() => {
     setOrder({
       businessId: businessInfo.id,
@@ -84,7 +89,7 @@ const ConfirmationScreen = ({ navigation }) => {
                       key={item.item_id}
                       containerStyle={
                         { backgroundColor:
-                          item._id === currentPayment._id ? '#CBDBFC' : null
+                          item._id === currentPayment._id ? '#CBDBFC' : '#FFFFFF'
                         }}
                       bottomDivider>
                       <ListItem.Content>
@@ -163,6 +168,17 @@ const ConfirmationScreen = ({ navigation }) => {
               () => {
                 submitOrder(order);
                 setShowModal(true);
+                resetOrder();
+              }
+            }
+          />
+        </Spacer>
+        <Spacer>
+          <Button title="Cancel"
+            onPress={
+              () => {
+                resetOrder();
+                navigation.navigate('Map');
               }
             }
           />
