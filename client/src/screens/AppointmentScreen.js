@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     // paddingVertical: '10px'
   },
 
-  caldendarButton: {
+  calendarButton: {
     width: '80%',
     alignSelf: 'center',
     color: '#374DD5',
