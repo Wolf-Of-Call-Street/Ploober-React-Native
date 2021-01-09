@@ -3,13 +3,14 @@ import { View, Text } from 'react-native';
 import { Input } from 'react-native-elements';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
 
-const Issue = ({issue, setIssue}) => {
+const Issue = ({issue, setIssue, styles}) => {
   const {state} = useContext(AppointmentContext);
 
   return (
-    <View>
-      <Text> Please explain your issue below: </Text>
+    <View style={styles.issueView}>
+      <Text style={styles.issueText}> Please explain your issue below: </Text>
       <Input
+        style={styles.issueInput}
         label="Issue"
         value={issue}
         onChangeText={setIssue}
