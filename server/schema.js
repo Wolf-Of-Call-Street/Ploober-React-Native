@@ -20,7 +20,7 @@ const multiAddressSchema = new mongoose.Schema({
 const creditSchema = new mongoose.Schema({
   number: {
     type: String,
-    required: true
+    required: true,
   },
   billingAddress: addressSchema,
   expiry: {
@@ -34,6 +34,10 @@ const creditSchema = new mongoose.Schema({
   type: {
     type: String
   },
+  cvc: {
+    type: String,
+    required: true
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -42,6 +46,7 @@ const creditSchema = new mongoose.Schema({
 
 const multiCreditSchema = new mongoose.Schema({
   creditcards: [ creditSchema ],
+  city: String,
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -131,8 +136,7 @@ userSchema.methods.comparePassword = function(potentialPassword) {
 
 
 const User = mongoose.model('User', userSchema);
-// const UserInfo = mongoose.model('UserInfo', userInfoSchema);
-const Credit = mongoose.model('Credit', creditSchema);
+const Credit = mongoose.model('Credit', multiCreditSchema);
 const Address = mongoose.model('Address', multiAddressSchema);
 const History = mongoose.model('History', historySchema);
 

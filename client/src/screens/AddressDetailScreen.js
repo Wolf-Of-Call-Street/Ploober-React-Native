@@ -6,7 +6,7 @@ KeyboardAwareScrollView
 import AddressForm from '../components/AddressForm';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
 
-const AddressDetailScreen = () => {
+const AddressDetailScreen = ({ navigation }) => {
   const { state: { addresses }, setAddressInfo, sendAddressInfo } = useContext(AppointmentContext);
 
   useEffect(() => {
@@ -35,6 +35,8 @@ const AddressDetailScreen = () => {
             setAddressInfo={setAddressInfo}
             sendAddressInfo={sendAddressInfo}
             addresses={addresses}
+            overwritePrivileges
+            navigation={navigation}
           />
         </ScrollView>
       </TouchableWithoutFeedback>
