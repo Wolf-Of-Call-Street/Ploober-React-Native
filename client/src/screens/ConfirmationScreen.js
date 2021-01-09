@@ -1,30 +1,74 @@
-import React, { useContext, useState, useEffect} from 'react';
-import { StyleSheet, FlatList, ScrollView, View, TouchableHighlight, TouchableOpacity, LogBox } from 'react-native';
-import { Card, Text, Button, ListItem, Divider} from 'react-native-elements';
-import Spacer from '../components/Spacer';
+import React, {
+  useContext,
+  useState,
+  useEffect
+} from 'react';
+
+import {
+  StyleSheet,
+  FlatList,
+  ScrollView,
+  View,
+  TouchableHighlight,
+  TouchableOpacity,
+  LogBox
+} from 'react-native';
+
+import {
+  Card,
+  Text,
+  Button,
+  ListItem,
+  Divider
+} from 'react-native-elements';
+
 import {
   Context as AppointmentContext
 } from '../context/AppointmentContext';
+
 import { NavigationEvents } from 'react-navigation';
+import Spacer from '../components/Spacer';
 import ConfirmModal from '../components/ConfirmModal';
+
 const ConfirmationScreen = ({ navigation }) => {
   LogBox.ignoreLogs(['VirtualizedLists should never be nested',
-  'componentWillReceiveProps has been renamed']);
-  const { state: { appointmentReason, dateTime, addresses, cardInfo, currentAddress, currentPayment, localBusinesses, businessInfo, creditcards }, fetchAddresses, fetchPaymentInfo, setCurrentAddress, setCurrentPayment, submitOrder, state } = useContext(AppointmentContext);
+    'componentWillReceiveProps has been renamed']);
+
+  const {
+    state: {
+      appointmentReason,
+      dateTime,
+      addresses,
+      cardInfo,
+      currentAddress,
+      currentPayment,
+      localBusinesses,
+      businessInfo,
+      creditcards
+    },
+    fetchAddresses,
+    fetchPaymentInfo,
+    setCurrentAddress,
+    setCurrentPayment,
+    submitOrder,
+    state }
+    = useContext(AppointmentContext);
 
   const [showModal, setShowModal] = useState(false);
   const [order, setOrder] = useState({});
 
-  const day = new Date(dateTime).toLocaleDateString('en-US', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
+  const day = new Date(dateTime)
+    .toLocaleDateString('en-US', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
 
-  const time = new Date(dateTime).toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-  });
+  const time = new Date(dateTime)
+    .toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+    });
 
   const resetOrder = () => {
     setCurrentPayment('');
@@ -40,6 +84,7 @@ const ConfirmationScreen = ({ navigation }) => {
       address: currentAddress
     })
   }, [currentAddress]);
+
   return (
     <>
       <NavigationEvents
