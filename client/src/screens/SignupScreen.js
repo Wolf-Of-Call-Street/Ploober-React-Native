@@ -42,10 +42,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    marginBottom: 150
+    paddingHorizontal: 25,
+    paddingBottom: 150,
+    backgroundColor: "#CBDBFC"
   },
   header: {
-    marginBottom: 30
+    marginBottom: 30,
+    fontWeight: "bold"
   }
 });
 

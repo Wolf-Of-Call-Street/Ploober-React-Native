@@ -70,7 +70,7 @@ const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
         {errorName ? <Text style={styles.error}>{errorName}</Text> : null}
         {screenName === 'Sign Up for Ploober'
           ? <Button
-              style={{ marginTop: 20 }}
+              style={{ marginTop: 40 }}
               title="Submit"
               onPress={() => {
                 setLoading(true);
@@ -78,7 +78,7 @@ const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
                 }}
             />
           : <Button
-              style={{ marginTop: 20 }}
+              style={{ marginTop: 40 }}
               title="Submit"
               onPress={() => {
                 setLoading(true);
@@ -93,7 +93,7 @@ const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
 
 const styles = StyleSheet.create({
   header: {
-    marginBottom: 30
+    marginBottom: 50
   },
   error: {
     color: "#FE2C16"
