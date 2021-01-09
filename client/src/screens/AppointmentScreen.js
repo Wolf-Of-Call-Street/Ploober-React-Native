@@ -25,6 +25,7 @@ const AppointmentScreen = ({navigation}) => {
       setDateTime={setDateTime}
       styles={styles}/>
       <Confirm
+      style={styles.confirmButton}
       navigation={navigation}
       setAppointmentInfo={setAppointmentInfo}
       issue={issue}
@@ -39,7 +40,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#CBDBFC',
     height: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flex: 0,
+    // flexDirection: 'column',
+    justifyContent: 'space-between'
   },
 
   businessName: {
@@ -55,10 +58,20 @@ const styles = StyleSheet.create({
   },
 
   issueInput: {
-
+    backgroundColor: 'rgba(55, 77, 213, 0.2)',
+    height: 'auto',
+    width: '80%',
+    minHeight: '35%',
+    alignSelf: 'center',
+    textAlign: 'justify',
+    borderColor: '#374DD5',
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderRadius: 25
   },
 
   issueText: {
+    alignSelf: 'center',
     fontSize: 15
   },
 
@@ -66,8 +79,15 @@ const styles = StyleSheet.create({
     // paddingVertical: '10px'
   },
 
-  caldendarButton: {
+  calendarButton: {
+    width: '80%',
+    alignSelf: 'center',
+    color: '#374DD5',
+    borderRadius: 50
+  },
 
+  confirmButton: {
+    bottom: 0
   }
 });
 
