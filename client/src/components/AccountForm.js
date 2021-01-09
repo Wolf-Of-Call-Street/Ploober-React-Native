@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, Button, Input } from 'react-native-elements';
+import { Jiro } from 'react-native-textinput-effects';
 import { StyleSheet, ActivityIndicator } from 'react-native';
 import userApi from '../api/userApi.js';
 
@@ -22,42 +23,54 @@ const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
       <>
         {screenName === 'Sign Up for Ploober' ?
         <>
-        <Input
+        <Jiro
         label="First Name"
         value={firstName}
         onChangeText={setFirstName}
         autoCapitalize="none"
         autoCorrect={false}
+        borderColor={'#374DD5'}
+        inputPadding={16}
+        inputStyle={{ color: 'white' }}
         />
-        <Input
+        <Jiro
         label="Last Name"
         value={lastName}
         onChangeText={setLastName}
         autoCapitalize="none"
         autoCorrect={false}
+        borderColor={'#374DD5'}
+        inputPadding={16}
+        inputStyle={{ color: 'white' }}
         />
         </>
         : null}
-        <Input
+        <Jiro
           label="Username"
           value={username}
           onChangeText={setUsername}
           autoCapitalize="none"
           autoCorrect={false}
+          borderColor={'#374DD5'}
+          inputPadding={16}
+          inputStyle={{ color: 'white' }}
         />
-        <Input
+        <Jiro
           label="Password"
           value={password}
           onChangeText={setPassword}
           autoCapitalize="none"
           autoCorrect={false}
           blurOnSubmit={false}
+          borderColor={'#374DD5'}
+          inputPadding={16}
+          inputStyle={{ color: 'white' }}
           secureTextEntry
         />
-        {errorName ? <Text>{errorName}</Text> : null}
+        {errorName ? <Text style={styles.error}>{errorName}</Text> : null}
         {screenName === 'Sign Up for Ploober'
           ? <Button
-              style={{ marginTop: 20 }}
+              style={{ marginTop: 40 }}
               title="Submit"
               onPress={() => {
                 setLoading(true);
@@ -65,7 +78,7 @@ const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
                 }}
             />
           : <Button
-              style={{ marginTop: 20 }}
+              style={{ marginTop: 40 }}
               title="Submit"
               onPress={() => {
                 setLoading(true);
@@ -80,7 +93,10 @@ const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
 
 const styles = StyleSheet.create({
   header: {
-    marginBottom: 30
+    marginBottom: 50
+  },
+  error: {
+    color: "#FE2C16"
   }
 })
 
