@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 
 const instance = axios.create({
 
-  baseURL: 'http://85c74e102e28.ngrok.io',
+  baseURL: 'http://6e2ab10b189e.ngrok.io',
 
 });
 

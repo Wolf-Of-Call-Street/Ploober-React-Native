@@ -28,12 +28,12 @@ const Account = createBottomTabNavigator({
 });
 mainFlow.navigationOptions = {
   title: 'Businesses',
-  tabBarIcon: <Feather name="map" size={20} color="#374DD5" />
+  tabBarIcon: <Feather name="map" size={35} color="#374DD5" />
 };
 
 Account.navigationOptions = {
   title: 'History',
-  tabBarIcon: <MaterialIcons name="account-circle" size={30} color="#374DD5"/>
+  tabBarIcon: <MaterialIcons name="account-circle" size={35} color="#374DD5"/>
 }
 
 const switchNavigator = createSwitchNavigator({
