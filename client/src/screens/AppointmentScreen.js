@@ -14,18 +14,61 @@ const AppointmentScreen = ({navigation}) => {
   const { state, setAppointmentInfo } = useContext(AppointmentContext);
 
   return (
-    <View>
-      {/* {console.log(state.businessInfo)} */}
-      <PlumberInfo />
-      <Issue issue={issue} setIssue={setIssue}/>
-      <CalendarModule dateTime={dateTime} setDateTime={setDateTime}/>
-      <Confirm navigation={navigation} setAppointmentInfo={setAppointmentInfo} issue={issue} dateTime={dateTime}/>
+    <View style={styles.mainView}>
+      <PlumberInfo styles={styles}/>
+      <Issue
+      issue={issue}
+      setIssue={setIssue}
+      styles={styles}/>
+      <CalendarModule
+      dateTime={dateTime}
+      setDateTime={setDateTime}
+      styles={styles}/>
+      <Confirm
+      navigation={navigation}
+      setAppointmentInfo={setAppointmentInfo}
+      issue={issue}
+      dateTime={dateTime}/>
     </View>
   )
 };
 
 const styles = StyleSheet.create({
 
+  mainView: {
+    backgroundColor: '#CBDBFC',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+
+  businessName: {
+    fontSize: 40,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#374DD5'
+  },
+
+  genericText: {
+    fontSize: 20,
+    textAlign: 'center'
+  },
+
+  issueInput: {
+
+  },
+
+  issueText: {
+    fontSize: 15
+  },
+
+  issueView: {
+    // paddingVertical: '10px'
+  },
+
+  caldendarButton: {
+
+  }
 });
 
 export default AppointmentScreen;

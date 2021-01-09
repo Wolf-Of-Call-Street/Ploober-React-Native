@@ -1,14 +1,11 @@
-import React, {useState, useContext, Component} from 'react';
+import React, {useState, useContext} from 'react';
 import { View, Text, Button } from 'react-native';
-import DatePicker from 'react-native-datepicker';
-// import TimePicker from 'react-native-datetimepicker';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
 
 
 
-const CalendarModule = ({dateTime, setDateTime}) => {
+const CalendarModule = ({dateTime, setDateTime, styles}) => {
 
   const {state} = useContext(AppointmentContext);
   const [monthYear, setMonthYear] = useState(0);
@@ -41,7 +38,7 @@ const CalendarModule = ({dateTime, setDateTime}) => {
 
   return (
     <View>
-      <Text>{date.toLocaleDateString()} at {date.toLocaleTimeString()}</Text>
+      <Text style={styles.genericText}>{date.toLocaleDateString()} at {date.toLocaleTimeString()}</Text>
       <View>
         <Button name="Calendar Button" onPress={showDatepicker} title="Choose Date" />
       </View>
