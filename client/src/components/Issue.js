@@ -9,13 +9,13 @@ const Issue = ({issue, setIssue, styles}) => {
   return (
     <View >
       <Text style={styles.issueText}> Please explain your issue below: </Text>
-      <TextInput
-        style={styles.issueInput}
-        label="Issue"
-        value={issue}
-        multiline={true}
-        onChangeText={setIssue}
-      />
+        <TextInput
+          style={styles.issueInput}
+          label="Issue"
+          value={issue}
+          multiline={true}
+          onChangeText={setIssue}
+        />
     </View>
   )
 };
