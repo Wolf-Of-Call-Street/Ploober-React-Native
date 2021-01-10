@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import { View, Text, StyleSheet} from 'react-native';
-// import Name from '../components/PlumberName.js';
+import { LinearGradient } from 'expo-linear-gradient';
 import PlumberInfo from '../components/PlumberInfo.js';
 import Issue from '../components/Issue.js';
 import CalendarModule from '../components/Calendar.js';
@@ -14,7 +14,12 @@ const AppointmentScreen = ({navigation}) => {
   const { state, setAppointmentInfo } = useContext(AppointmentContext);
 
   return (
-    <View style={styles.mainView}>
+    <LinearGradient
+      colors={['#2FA3F1', '#CBDBFC', 'white']}
+      start={{ x: 0, y: 0.5 }}
+      end={{ x: 0, y: 1.0 }}
+      locations={[0.0, 0.5, 1]}
+    >
       <PlumberInfo styles={styles}/>
       <Issue
       issue={issue}
@@ -30,18 +35,16 @@ const AppointmentScreen = ({navigation}) => {
       setAppointmentInfo={setAppointmentInfo}
       issue={issue}
       dateTime={dateTime}/>
-    </View>
+    </LinearGradient>
   )
 };
 
 const styles = StyleSheet.create({
 
   mainView: {
-    backgroundColor: '#CBDBFC',
     height: '100%',
     display: 'flex',
     flex: 0,
-    // flexDirection: 'column',
     justifyContent: 'space-between'
   },
 
@@ -76,7 +79,8 @@ const styles = StyleSheet.create({
   },
 
   issueView: {
-    // paddingVertical: '10px'
+    backgroundColor: '#CBDBFC',
+    borderRadius: 25
   },
 
   calendarButton: {
