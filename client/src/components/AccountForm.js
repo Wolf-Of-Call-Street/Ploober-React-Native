@@ -14,7 +14,10 @@ const AccountForm = ({ screenName, errorName, onSubmit, navigateCallback }) => {
   if (loading) {
     return (
       <>
-        <ActivityIndicator size="large"/>
+        <ActivityIndicator
+          size="large"
+          color="black"
+        />
         {errorName ? <Text>{errorName}</Text> : null}
       </>
     )
