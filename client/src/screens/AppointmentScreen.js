@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import { View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import PlumberInfo from '../components/PlumberInfo.js';
 import Issue from '../components/Issue.js';
@@ -20,21 +20,29 @@ const AppointmentScreen = ({navigation}) => {
       end={{ x: 0, y: 1.0 }}
       locations={[0.0, 0.5, 1]}
     >
-      <PlumberInfo styles={styles}/>
-      <Issue
-      issue={issue}
-      setIssue={setIssue}
-      styles={styles}/>
-      <CalendarModule
-      dateTime={dateTime}
-      setDateTime={setDateTime}
-      styles={styles}/>
-      <Confirm
-      style={styles.confirmButton}
-      navigation={navigation}
-      setAppointmentInfo={setAppointmentInfo}
-      issue={issue}
-      dateTime={dateTime}/>
+        <TouchableWithoutFeedback
+          onPress={Keyboard.dismiss}
+          accessible={false}
+        >
+          <View>
+            <PlumberInfo styles={styles}/>
+            <Issue
+              issue={issue}
+              setIssue={setIssue}
+              styles={styles}/>
+            <CalendarModule
+              dateTime={dateTime}
+              setDateTime={setDateTime}
+              styles={styles}/>
+            <Confirm
+              style={styles.confirmButton}
+              navigation={navigation}
+              setAppointmentInfo={setAppointmentInfo}
+              issue={issue}
+              dateTime={dateTime}/>
+          </View>
+      </TouchableWithoutFeedback>
+
     </LinearGradient>
   )
 };
