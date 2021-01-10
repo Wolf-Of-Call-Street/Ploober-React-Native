@@ -125,20 +125,10 @@ const ConfirmationScreen = ({ navigation }) => {
               <Text style={styles.cardText}>{time}</Text>
             </View>
           </View>
-          <Text>
-            {appointmentReason}
+          <Card.Divider />
+          <Text style={styles.reason}>
           </Text>
         </Card>
-        {/* <Spacer>
-          <Text h3 style={styles.center}> Appointment Date</Text>
-        </Spacer>
-        <Spacer>
-          { dateTime === 0 ?
-            <Text style={styles.center}> Select a Valid Appointment Slot</Text> :
-            <Text style={styles.center}>{day} at {time}</Text>
-          }
-        </Spacer>
-        <Divider /> */}
         <Spacer>
           <Text style={styles.center}>Payment Information</Text>
           <Spacer>
@@ -150,23 +140,25 @@ const ConfirmationScreen = ({ navigation }) => {
                   <TouchableOpacity
                     onPress={() => setCurrentPayment(item)}
                   >
-                    <ListItem
-                      key={item.item_id}
-                      containerStyle={
-                        {
-                          backgroundColor:
-                            item._id === currentPayment._id ? '#CBDBFC' : '#FFFFFF'
-                        }}
-                      bottomDivider>
-                      <ListItem.Content>
-                        <ListItem.Title>
-                          {item.type.charAt(0).toUpperCase() + item.type.slice(1)} ending in {item.number.slice(-4)}
-                        </ListItem.Title>
-                        <ListItem.Subtitle>
-                          Exp: {item.expiry}
-                        </ListItem.Subtitle>
-                      </ListItem.Content>
-                    </ListItem>
+                    { item ?
+                      <ListItem
+                        key={item.item_id}
+                        containerStyle={
+                          {
+                            backgroundColor:
+                              item._id === currentPayment._id ? '#CBDBFC' : '#FFFFFF'
+                          }}
+                        bottomDivider>
+                        <ListItem.Content>
+                          <ListItem.Title>
+                            {item.type.charAt(0).toUpperCase() + item.type.slice(1)} ending in {item.number.slice(-4)}
+                          </ListItem.Title>
+                          <ListItem.Subtitle>
+                            Exp: {item.expiry}
+                          </ListItem.Subtitle>
+                        </ListItem.Content>
+                      </ListItem>
+                      : null}
                   </TouchableOpacity>
                 )
               }}
@@ -202,9 +194,14 @@ const ConfirmationScreen = ({ navigation }) => {
                         }}
                       bottomDivider>
                       <ListItem.Content>
-                        <ListItem.Title>
-                          {item.line1} {item.line2}
-                        </ListItem.Title>
+                        {item.line2 ?
+                          <ListItem.Title>
+                            {item.line1}, {item.line2}
+                          </ListItem.Title>
+                          : <ListItem.Title>
+                            {item.line1}
+                          </ListItem.Title>
+                        }
                         <ListItem.Subtitle>
                           {item.city}, {item.state} {item.zipcode}
                         </ListItem.Subtitle>
@@ -269,6 +266,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
     justifyContent: 'space-between',
+    paddingBottom: 15,
   },
   cardContentRow: {
     flexDirection: 'row',
@@ -279,7 +277,6 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 20,
     fontWeight: '600',
-    // alignSelf: 'flex-start',
     color: '#FFF'
   },
   cardText: {
@@ -301,6 +298,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 24,
   },
+  reason: {
+    fontStyle: 'italic',
+    color: 'white'
+  }
 });
 
 export default ConfirmationScreen;

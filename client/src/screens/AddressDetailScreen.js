@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Keyboard, TouchableWithoutFeedback, ScrollView 
 import {
 KeyboardAwareScrollView
 } from 'react-native-keyboard-aware-scroll-view';
+import { LinearGradient } from 'expo-linear-gradient';
 import AddressForm from '../components/AddressForm';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
 
@@ -16,6 +17,12 @@ const AddressDetailScreen = ({ navigation }) => {
   }, [addresses]);
 
   return (
+    <LinearGradient
+    colors={['#2FA3F1', '#CBDBFC', 'white']}
+    start={{ x: 0, y: 0.5 }}
+    end={{ x: 0, y: 1.0 }}
+    locations={[0.0, 0.5, 1]}
+  >
     <KeyboardAwareScrollView
       enableOnAndroid
       extraHeight={150}
@@ -37,10 +44,12 @@ const AddressDetailScreen = ({ navigation }) => {
             addresses={addresses}
             overwritePrivileges
             navigation={navigation}
+            validCard
           />
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAwareScrollView>
+    </LinearGradient >
   )
 }
 
