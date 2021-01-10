@@ -1,6 +1,6 @@
 import React, { useContext, useEffect} from 'react';
-import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { Button, Text, FlatList } from 'react-native-elements';
+import { View, StyleSheet, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import { Button, Text } from 'react-native-elements';
 import { Context as AppointmentContext } from '../context/AppointmentContext';
 import APlumber from './APlumber';
 
@@ -15,19 +15,23 @@ const Plumber = ({ navigation }) => {
     return null
   }
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <View style={{paddingBottom: 255}} >
-          {state.localBusinesses.map(business => {
-            return (
-              <View style={styles.businesspanel} key={business.id}>
-                <APlumber business={business}  navigation={navigation}/>
+
+          <FlatList
+            data={state.localBusinesses}
+            keyExtractor={(business) => business.id}
+            style={styles.container}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{flexGrow: 1}}
+            renderItem={({ item }) => {
+              return (
+                <View style={styles.businesspanel} >
+                <APlumber business={item}  navigation={navigation}/>
               </View>
-            )
-          })}
-        </View>
-      </ScrollView>
-    </View>
+              )
+            }}
+          >
+          </FlatList>
+    // </View>
   )
 };
 
@@ -35,12 +39,12 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#CBDBFC',
     borderWidth: 2,
-    padding: 5
+    padding: 10,
+    height: 440
   },
   businesspanel: {
-    // flexDirection: 'row',
     marginBottom: 10,
-    borderBottomWidth: 2
+    borderBottomWidth: 2,
   }
 });
 
