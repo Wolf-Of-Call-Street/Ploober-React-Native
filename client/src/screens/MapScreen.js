@@ -5,6 +5,7 @@ import Plumber from '../components/Plumber';
 import {Context as AppointmentContext} from '../context/AppointmentContext';
 import { requestPermissionsAsync } from 'expo-location';
 import Spacer from '../components/Spacer';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const MapScreen = ({ navigation }) => {
   const [err, setErr] = useState(null);
@@ -37,6 +38,12 @@ const MapScreen = ({ navigation }) => {
         })()
   }, []);
   return (
+    <LinearGradient
+      colors={['#2FA3F1', '#CBDBFC', 'white']}
+      start={{ x: 0, y: 0.5 }}
+      end={{ x: 0, y: 1.0 }}
+      locations={[0.0, 0.5, 1]}
+    >
     <View style={styles.container}>
       <Text style={styles.text}>Plumbers Nearest You</Text>
       <Map currentLocation={{ lat, long }}/>
@@ -44,13 +51,15 @@ const MapScreen = ({ navigation }) => {
       <Spacer />
       <Plumber navigation={navigation}/>
     </View>
+    </LinearGradient>
+
   )
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     margin: 10,
+    zIndex: 1
 
   },
   err: {
@@ -68,6 +77,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#CBDBFC',
     paddingTop: 3
   }
+
 });
 
 export default MapScreen;
